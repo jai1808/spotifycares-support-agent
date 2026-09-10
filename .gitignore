@@ -1,0 +1,45 @@
+# Data files (too large for git)
+data/twcs.csv
+data/embeddings_cache/
+data/*.npy
+data/rag_index*
+data/brand_conversations.json
+data/first_contact_pairs.json
+data/rag_corpus.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# Environment
+.env
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Outputs (large per-example dumps; keep summaries)
+outputs/results_*.json
+outputs/all_results.json
+outputs/eval_run.log
+outputs/embeddings_cache/
+
+# Keep committed: comparison.md, report_*.md, human_agreement.json, metrics_summary.json
+!outputs/comparison.md
+!outputs/report_*.md
+!outputs/human_agreement.json
+!outputs/metrics_summary.json
+!outputs/.gitkeep

@@ -1,0 +1,2640 @@
+{
+  "metadata": {
+    "n_samples": 200,
+    "n_clusters_used": 15,
+    "intent_distribution": {
+      "Account_Access": 28,
+      "App_Bug_Crash": 14,
+      "Billing_Payment": 20,
+      "Content_Availability": 37,
+      "Feature_Request": 25,
+      "General_Inquiry": 30,
+      "Playback_Issue": 25,
+      "Subscription_Plan": 21
+    },
+    "escalation_rate": 0.09,
+    "sampling_strategy": "TF-IDF + KMeans clustering for topical diversity, proportional sampling per cluster, auto-labeled with LLM then reviewed",
+    "labeling_schema": {
+      "intent_categories": [
+        "Account_Access",
+        "Billing_Payment",
+        "Playback_Issue",
+        "App_Bug_Crash",
+        "Content_Availability",
+        "Subscription_Plan",
+        "Feature_Request",
+        "General_Inquiry"
+      ],
+      "escalation_rules": [
+        "Account security compromise",
+        "Billing/payment disputes",
+        "Legal threats",
+        "Extreme frustration / abusive language",
+        "Explicit request for human agent",
+        "Safety concerns"
+      ]
+    }
+  },
+  "examples": [
+    {
+      "thread_id": "809554",
+      "user_tweet": "@SpotifyCares it worked! thanks!",
+      "brand_reply": "@312899 Awesome! Let us know if you ever need us again. We'd be... https://t.co/LgAM6ky9Vv 🙂 /NY",
+      "user_author": "312899",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "General_Inquiry",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is a positive confirmation that a previous issue was resolved, not a new inquiry. It doesn't fit neatly into any specific intent category, but General_Inquiry is the closest match as it's a general expression of gratitude. No escalation is needed as it's a positive interaction."
+      }
+    },
+    {
+      "thread_id": "1808874",
+      "user_tweet": "@117153 why is my subscription is  terminated? I tried to go premium but its terminated",
+      "brand_reply": "@543430 Hey, that's not cool! Can you DM us your account's username or email address? We'll take a look under the hood /JM https://t.co/ldFdZRiNAt",
+      "user_author": "543430",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Subscription_Plan",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is asking about a terminated subscription and an attempt to go premium, which could be confused with Billing_Payment or Account_Access, but it's primarily about subscription status and plan management."
+      }
+    },
+    {
+      "thread_id": "760614",
+      "user_tweet": "@SpotifyCares I accidentally thumbs-downed one of my favourite songs in a station, how can I undo it? :(",
+      "brand_reply": "@206140 Hey Dayne! We're afraid this isn't currently possible, but you can vote for the official idea here: https://t.co/yqUShsRSf0 /TF",
+      "user_author": "206140",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Feature_Request",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is asking how to undo a thumbs-down action, which is a feature request since the functionality doesn't exist. It's not a bug or playback issue, and there's no escalation trigger."
+      }
+    },
+    {
+      "thread_id": "1923484",
+      "user_tweet": "@SpotifyCares I'm a paying customer. Not sure what I'm paying for. This keeps happening both on moblile and laptop. #fedup",
+      "brand_reply": "@572542 Hi Helena! The cavalry's here. Can you DM us your account's username or email address? We'll take a look under the hood /HC https://t.co/ldFdZRiNAt",
+      "user_author": "572542",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Playback_Issue",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user expresses frustration with a recurring issue on multiple devices but does not specify the exact problem, making it tricky to distinguish between a playback issue, app bug, or general inquiry. The hashtag #fedup indicates frustration but not extreme enough to warrant escalation."
+      }
+    },
+    {
+      "thread_id": "2919379",
+      "user_tweet": "@SpotifyCares I keep getting an error occurred when searching for artists 😰",
+      "brand_reply": "@808037 Hey there! Everything should be running smoothly now. Let us know if this is still happening /FR",
+      "user_author": "808037",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "App_Bug_Crash",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user reports an error when searching for artists, which could be a playback issue or app bug. The error message suggests a technical glitch, so App_Bug_Crash is most appropriate. No escalation triggers present."
+      }
+    },
+    {
+      "thread_id": "2978420",
+      "user_tweet": "@SpotifyCares I am currently in the USA. My wife is in the Philippines. She told me about the 3 month offer for 9 Philippine peso. Is there some why I can gift this to her",
+      "brand_reply": "@821431 Hi, help's arrived! Since you live in different countries, you won't be able to purchase a Spotify gift card for your wife. Spotify gift cards can only be redeemed in the country they were purchased in. Find out more at https://t.co/m94O73CpOR. Hope this helps /JQ",
+      "user_author": "821431",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Subscription_Plan",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is asking about gifting a subscription offer, which could be confused with Billing_Payment or General_Inquiry, but it's specifically about a subscription plan promotion."
+      }
+    },
+    {
+      "thread_id": "303545",
+      "user_tweet": "@SpotifyCares yes! thanks!",
+      "brand_reply": "@188465 Nice! We're glad it's working now. Now let's... https://t.co/flUnoJ2P8u /TB",
+      "user_author": "188465",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "General_Inquiry",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is a simple acknowledgment without a clear request, making intent classification ambiguous; it could be a follow-up to a previous interaction, but no specific issue is present."
+      }
+    },
+    {
+      "thread_id": "236273",
+      "user_tweet": "Did @SpotifyCares update and change the EQ, everything sounds different today on my Mac :| https://t.co/taFqBKzVaP",
+      "brand_reply": "@172261 Hey there! We'd love to help. Can you let us know what's happening exactly? /RC",
+      "user_author": "172261",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Playback_Issue",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user mentions a change in EQ and sound quality, which could be interpreted as a playback issue or an app bug. However, since it's about audio quality after an update, it's more aligned with playback. The mild frustration (':|') does not meet escalation criteria."
+      }
+    },
+    {
+      "thread_id": "2482543",
+      "user_tweet": "@SpotifyCares hey my songs are not downloading on my xperia xa1.",
+      "brand_reply": "@709277 Hi Nico! Help's here. Can you DM us your account's email address? We'll take a look backstage /MG https://t.co/ldFdZRiNAt",
+      "user_author": "709277",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Playback_Issue",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The issue is about songs not downloading, which could be interpreted as a playback issue or an app bug. However, since it's a specific functionality problem (downloading) rather than a crash or bug, Playback_Issue is the most appropriate category. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "1925336",
+      "user_tweet": "@117153 It keeps saying (daily) I'm offline when not then: log out desktop, try login in FB, screen doesn't come up to agree to login",
+      "brand_reply": "@573063 Hi Shari! Can you DM us your account's email address and a screenshot of what you're seeing on your end? We'll check backstage /AU https://t.co/ldFdZRiNAt",
+      "user_author": "573063",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Account_Access",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user reports login issues and being marked offline, which could be interpreted as a playback issue or app bug, but the core problem is accessing the account, so Account_Access is most appropriate. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "848548",
+      "user_tweet": "@SpotifyCares Ok thanks will DM u as soon as I can.",
+      "brand_reply": "@321655 No worries. Just click on \"Send a private message\" to fire it over. We'll be on the lookout for it /AY",
+      "user_author": "321655",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "General_Inquiry",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is a simple acknowledgment and does not contain a clear request or issue, making intent classification ambiguous. It could be part of an ongoing conversation, but without context, it's best classified as a general inquiry."
+      }
+    },
+    {
+      "thread_id": "488775",
+      "user_tweet": "@116130 I can’t sign up to premium as I’m with Tesco mobile. How do I sign up?",
+      "brand_reply": "@231390 Hi Freddie! Can you shoot over your account's username and email address? We'll check things out backstage /WW https://t.co/ldFdZRiNAt",
+      "user_author": "231390",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Subscription_Plan",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is asking about signing up for Premium but mentions a carrier restriction (Tesco mobile), which could be interpreted as a billing/payment issue or a subscription plan question. However, the core intent is about subscribing to a plan, so Subscription_Plan is most appropriate. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "1651057",
+      "user_tweet": "@SpotifyCares kindly check your DM..",
+      "brand_reply": "@504240 Hi there! We've just sent a DM your way. Let's carry on chatting there /FR",
+      "user_author": "504240",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "General_Inquiry",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is extremely vague, only asking SpotifyCares to check their DM. Without additional context, it's impossible to determine the specific issue, so it falls under General_Inquiry. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "591469",
+      "user_tweet": "@SpotifyCares My PC is having issues launching spotify, and keeps showing me this error. I tried reinstalling, but even when i try to uninstall the program through the task manager it shows this error. I manually deleted the files, then reinstalled, and its still broken. https://t.co/r3rI4BxMVH",
+      "brand_reply": "@259954 Hey there! That doesn't look good. Can you let us know the operating system and app version you're running? We'll see what we can suggest /PB",
+      "user_author": "259954",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "App_Bug_Crash",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user reports a persistent error preventing Spotify from launching on PC, even after reinstall attempts. This could be classified as a playback issue or app bug, but the core problem is the app crashing/erroring, so App_Bug_Crash is most appropriate. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "1800542",
+      "user_tweet": "@SpotifyCares I was browsing a certain artist and noticed a song missing that was previously there. Why was it removed?",
+      "brand_reply": "@196786 Hey there! Sometimes content gets temporarily removed because of licensing changes. Hopefully we'll have it available again soon /MO",
+      "user_author": "196786",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is asking about a missing song, which could be mistaken for a playback issue or app bug, but it's specifically about content availability due to licensing changes."
+      }
+    },
+    {
+      "thread_id": "1517206",
+      "user_tweet": "@SpotifyCares I tested this last night, with the new device too; reformatted as portable, and I had the option, but prefer the internal format.",
+      "brand_reply": "@301192 Got it! We appreciate your feedback. We'll make sure to let the right folks know it's something you'd like to see /GT",
+      "user_author": "301192",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Feature_Request",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is ambiguous and lacks clear context, but the brand reply indicates it's feedback about a feature preference, so it's classified as a feature request. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "2641101",
+      "user_tweet": "@SpotifyCares Al right, thanks for the reply!",
+      "brand_reply": "@204887 https://t.co/qAh6tkevrD! You know where to find us if there's anything else /XF",
+      "user_author": "204887",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "General_Inquiry",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is a polite acknowledgment with no specific request, making it a general inquiry. The brand reply is a standard closing, so no escalation is needed."
+      }
+    },
+    {
+      "thread_id": "2032693",
+      "user_tweet": "Tadi siang saya sudah transfer &amp;  tanda terimanya juga sudah dapat,  tapi kenapa akun saya masih free.  Ada solusi @118266   ?",
+      "brand_reply": "@601078 Hi there! Can you send us your account's email address or username via DM? We'll take a look backstage /GT https://t.co/ldFdZRiNAt",
+      "user_author": "601078",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Billing_Payment",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user mentions a transfer and receipt, indicating a payment issue, but the core problem is that their account still shows as free. This could be interpreted as a subscription activation issue, but since it involves a payment transaction, Billing_Payment is the most appropriate category. The tweet is in Indonesian, which adds a language complexity."
+      }
+    },
+    {
+      "thread_id": "2898296",
+      "user_tweet": "@642 @148611 san na po ang PIN number??? Nakailang ulit ko na to https://t.co/NTSEhz4Wvf",
+      "brand_reply": "@484005 Hi Kenneth! We don't have Filipino support right now, but we'll be glad to help you here. We hope you don't mind if we reply to you in English. Could you DM us your account's email address and the subscription you're trying to get? /AU https://t.co/ldFdZRiNAt",
+      "user_author": "484005",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Account_Access",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is in Filipino and mentions a PIN number, which could relate to account access or payment verification. The user's frustration is evident but not abusive, and there's no explicit request for a human agent or security compromise."
+      }
+    },
+    {
+      "thread_id": "1251411",
+      "user_tweet": "@SpotifyCares check dm please",
+      "brand_reply": "@413573 Hi! We've just sent you a bit more info over DM. We'll carry on helping out there /AR",
+      "user_author": "413573",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "General_Inquiry",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is extremely vague, only asking SpotifyCares to check DMs. Without additional context, it's impossible to determine the specific issue, so it's classified as a general inquiry. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "1942605",
+      "user_tweet": "@SpotifyCares my acct keeps telling me I can’t download any more songs, so I un-downloaded a bunch but it’s still saying I have no room :(",
+      "brand_reply": "@238856 Hey! Which device/OS and Spotify version are you using? If you can also send us a screenshot of what you're seeing, that'll be helpful /YM",
+      "user_author": "238856",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Playback_Issue",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is experiencing an issue with downloading songs, which could be categorized as a playback issue or a content availability issue. However, since it's about the ability to download and storage limits, it leans towards playback. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "2917906",
+      "user_tweet": "@spotifycares guess you're down",
+      "brand_reply": "@807655 Hey there! Thanks for letting us know. Everything’s looking good on our end now - are you still having this issue? /CE",
+      "user_author": "807655",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Playback_Issue",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is very brief and ambiguous, but the brand's reply indicates a service outage or playback problem, so it's classified as Playback_Issue. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "2476384",
+      "user_tweet": "@SpotifyCares can't sign up for premium with paypal",
+      "brand_reply": "@707886 Hey! Can you DM us your account's email address? We'll see what we can suggest /CB https://t.co/ldFdZRiNAt",
+      "user_author": "707886",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Billing_Payment",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The issue involves a payment method (PayPal) during signup, which could be classified as Subscription_Plan or Billing_Payment. However, since it's specifically about payment method failure, Billing_Payment is more appropriate. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "1833885",
+      "user_tweet": "@SpotifyCares Nah, it's all good.",
+      "brand_reply": "@550098 Awesome 😁 Just let us know if we can help with anything else. https://t.co/m4HWSbgHVZ /GS",
+      "user_author": "550098",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "General_Inquiry",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is a brief, positive acknowledgment with no specific request or issue, making it ambiguous but clearly not requiring escalation."
+      }
+    },
+    {
+      "thread_id": "453445",
+      "user_tweet": "@117168 when are you going to fix the glitch that removes all of my songs from my downloads every other day? Having songs downloaded is literally one of the promoted features of paying for premium. This is ridiculous.",
+      "brand_reply": "@222589 Hey Ryan, sorry to hear that! Check out the steps under “Downloads unexpectedly removed” at https://t.co/EidIERWgLX. They should help with this /NS",
+      "user_author": "222589",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "App_Bug_Crash",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is reporting a recurring glitch that removes downloaded songs, which could be seen as a playback issue or content availability, but it's fundamentally a bug in the app. The frustration is present but not extreme enough to warrant escalation."
+      }
+    },
+    {
+      "thread_id": "1739243",
+      "user_tweet": "@SpotifyCares loved hearing all the RAK stories in #introfundays. So clever. Keep up all the awesome work! 👍🏼 🎶",
+      "brand_reply": "@524906 Thanks, we're really clever. Look at how good we are at chess! 😉 https://t.co/iHEJqxtpb6",
+      "user_author": "524906",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "General_Inquiry",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "This is a positive, non-actionable tweet praising Spotify, so it doesn't fit typical support intents; it's classified as General_Inquiry since no other category applies."
+      }
+    },
+    {
+      "thread_id": "2704351",
+      "user_tweet": "@SpotifyCares @SpotifyCares yeah that worked, should have done that initially. Thanks",
+      "brand_reply": "@759548 No worries! Glad to hear it's working. Just let us know if we can help with anything else. https://t.co/m4HWSbgHVZ /MG",
+      "user_author": "759548",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "General_Inquiry",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is a positive resolution message with no explicit request or issue, making it tricky to categorize since it doesn't fit typical problem categories. It's a follow-up confirming a fix, so General_Inquiry is the best fit."
+      }
+    },
+    {
+      "thread_id": "327720",
+      "user_tweet": "@118266 bln lalu sy telat byr paket premium (hrsnya tgl 6, tp br byr tgl 27). Knp sy msh trm notifikasi gagal bayar tgl 5 kmrn via email?",
+      "brand_reply": "@194131 Hey! We can help out in English via Twitter, but we also have Indonesian support via email at https://t.co/ZgU70TbP8M /QI",
+      "user_author": "194131",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Billing_Payment",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is asking about a payment failure notification despite having paid late, which is a billing inquiry but not a dispute or refund demand. The tweet is in Indonesian, requiring language understanding. The brand reply redirects to email support, which is not an escalation."
+      }
+    },
+    {
+      "thread_id": "1215721",
+      "user_tweet": "@SpotifyCares @115888 @117153 @38265 @405274 email rep won't respond, Twitter rep won't respond. Wtf???",
+      "brand_reply": "@405273 @115888 @117153 @38265 @405274 Hey Joshua! We've just replied to your DM. Check it out /C",
+      "user_author": "405273",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "General_Inquiry",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet expresses frustration but is not abusive, and the user is simply seeking a response from support. No specific issue category is mentioned, making it a general inquiry."
+      }
+    },
+    {
+      "thread_id": "1933658",
+      "user_tweet": "@SpotifyCares not working in samsung tv. Any known issues. Every other app is working perfect.",
+      "brand_reply": "@268676 Hi Will! As we look to improve the overall Spotify experience, we are removing the app from Samsung TV: https://t.co/D2p6hgpCoW /MG",
+      "user_author": "268676",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user reports the app not working on Samsung TV, which could be mistaken for a playback issue or app bug, but the actual cause is the app's removal from the platform, making it a content availability issue."
+      }
+    },
+    {
+      "thread_id": "1162320",
+      "user_tweet": "@SpotifyCares I've been billed but it's not showing on my subscription and I've been downgraded from premium?",
+      "brand_reply": "@393475 Hey there, help's here! Can you DM us your account's email address and username? We'll take a look backstage /CG https://t.co/ldFdZRiNAt",
+      "user_author": "393475",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Billing_Payment",
+        "should_escalate": true,
+        "escalation_reason": "Billing/payment dispute - user was charged but did not receive the expected subscription benefits (downgraded from premium despite being billed).",
+        "difficulty_notes": "The issue involves both billing and subscription status, but the core complaint is about being charged without receiving the service, which falls under billing/payment disputes and triggers escalation."
+      }
+    },
+    {
+      "thread_id": "1639770",
+      "user_tweet": "@SpotifyCares and with no customer service line, you guys suck!",
+      "brand_reply": "@501357 Hey there! Could you DM us your account's username and email address? We'll take a look backstage /DF https://t.co/ldFdZRiNAt",
+      "user_author": "501357",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "General_Inquiry",
+        "should_escalate": true,
+        "escalation_reason": "Extreme frustration / abusive language directed at support",
+        "difficulty_notes": "The tweet expresses frustration and insults but does not specify a particular issue, making intent classification ambiguous. The abusive language triggers escalation despite the lack of a clear problem."
+      }
+    },
+    {
+      "thread_id": "2175431",
+      "user_tweet": "@SpotifyCares More BTS songs in Sweden hit song on Spotify? \n\nBTS - SPRING DAY\nBTS - No Not Today\nBTS - No More Dream\nBTS - N.O \n\nWe need it so badly",
+      "brand_reply": "@637769 Hey there! We’d love to have all of their stuff available, but we have some info about content here: https://t.co/0i8GpimuDa /GK",
+      "user_author": "637769",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is requesting specific songs be made available, which could be mistaken for a feature request, but it's about content availability in a specific region."
+      }
+    },
+    {
+      "thread_id": "2055176",
+      "user_tweet": "@SpotifyCares No error codes. On my phone whenever I select a frank song whatever’s playing stops and the bar on the bottom disappears",
+      "brand_reply": "@607821 Got it. Does logging out &gt; restarting the device &gt; logging back in help? Let us know how you get on /CG",
+      "user_author": "607821",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Playback_Issue",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user describes a playback issue where selecting a specific song causes playback to stop and the UI element to disappear. This could be interpreted as an app bug, but the primary symptom is playback interruption, so Playback_Issue is more appropriate. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "1815601",
+      "user_tweet": "@SpotifyCares I can’t even use the online contact form because it’s linked to the login page... the one I can’t log in to.",
+      "brand_reply": "@340299 Hey Erin! The cavalry's here. Could you DM us your account's email address or username? We'll take a look under the hood /KB https://t.co/ldFdZRiNAt",
+      "user_author": "340299",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Account_Access",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is unable to log in and also cannot access the contact form due to the login requirement. This is a straightforward account access issue, but the mention of the contact form being inaccessible might be mistaken for a general inquiry or app bug. However, the core problem is login failure."
+      }
+    },
+    {
+      "thread_id": "1773088",
+      "user_tweet": "@SpotifyCares I can't update my payment information, the page just times out and I've been trying all day :(",
+      "brand_reply": "@532901 Hey there! Can you DM us your account's email address or username? We'll take a look backstage /RH https://t.co/ldFdZRiNAt",
+      "user_author": "532901",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Billing_Payment",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is trying to update payment information, which falls under Billing_Payment, but the issue is a page timeout, which could also be an App_Bug_Crash. However, the primary intent is billing-related. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "1026797",
+      "user_tweet": "@SpotifyCares @362963 It did not. Also tried incognito mode and it didn't work.",
+      "brand_reply": "@362962 Hey there! Could you DM us your account's username or email address? We'll take a look under the hood /GU https://t.co/ldFdZRiNAt",
+      "user_author": "362962",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Playback_Issue",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is a follow-up to a previous interaction, lacking context about the original issue. The mention of trying incognito mode suggests a playback or app issue, but without the original tweet, it's ambiguous. The brand reply asks for account details, indicating a need for further investigation, but no escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "2151266",
+      "user_tweet": "@131098 kunnen jullie mij uitleggen waarom de muziek van The XX wel te vinden is, maar niet afgespeeld meer kan worden?",
+      "brand_reply": "@632225 @131098 Hi! Hope you don't mind if we reply in English. We've just sent a DM your way. Let's carry on chatting there /GK",
+      "user_author": "632225",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is asking why The XX's music is available but cannot be played, which could be interpreted as a playback issue or content availability. However, the core issue is that the content is present but not playable, pointing to a content availability problem. The tweet is in Dutch, which adds a language complexity, but the intent is clear."
+      }
+    },
+    {
+      "thread_id": "1979543",
+      "user_tweet": "@SpotifyCares Saved songs/albums.\n\nThe hasty response is much appreciated ☺",
+      "brand_reply": "@586031 You're welcome. There's currently a 10k limit in Your Music (Songs + Albums + Artists). More info here: https://t.co/59ABtm5Ftl 🙂 /AU",
+      "user_author": "586031",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is a brief, somewhat ambiguous expression of gratitude, but the brand reply reveals the underlying issue is about a limit on saved songs/albums, which falls under content availability. The sarcastic tone ('hasty response is much appreciated') could be misread as frustration, but it's not abusive or extreme."
+      }
+    },
+    {
+      "thread_id": "383396",
+      "user_tweet": "@SpotifyCares I keyed in the same address.",
+      "brand_reply": "@206831 Hi there! We've just sent a DM your way. Let's carry on chatting there /AC",
+      "user_author": "206831",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Account_Access",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is very terse and lacks context; 'keyed in the same address' likely refers to a login/account access issue, but without more detail it could also relate to billing or profile settings."
+      }
+    },
+    {
+      "thread_id": "2055577",
+      "user_tweet": "@SpotifyCares There is still no option to cancel",
+      "brand_reply": "@607913 Thanks for giving it a shot! Can you DM us your account's email address or username? We'll take a look backstage /GT https://t.co/ldFdZRiNAt",
+      "user_author": "607913",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Subscription_Plan",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is reporting a missing cancel option, which could be interpreted as an app bug or a subscription management issue. However, since it directly relates to managing a subscription (cancellation), Subscription_Plan is the most appropriate category. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "100151",
+      "user_tweet": "@SpotifyCares \nReset password\nThe CSRF token is invalid. Please try to resubmit the form.\nPlease fix this!!!!!!!!!!!!!!!!!!!",
+      "brand_reply": "@137951 Hey Kelli! We've replied to your DM. Check your inbox /LM",
+      "user_author": "137951",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Account_Access",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is trying to reset their password but encounters a CSRF token error, which is a technical issue. The intent is Account_Access, but the error message suggests a potential app bug. However, the primary goal is account access. The multiple exclamation marks indicate frustration, but it's not extreme or abusive, so no escalation."
+      }
+    },
+    {
+      "thread_id": "547202",
+      "user_tweet": "@3493  you guys should update your app so we can clear recently played list faster instead one by one 😒😒 #lame https://t.co/b8sMgdzgL0",
+      "brand_reply": "@247283 We hear you 🎧 Rest assured, your feedback will be passed on to the right folks /DF",
+      "user_author": "247283",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Feature_Request",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet expresses frustration with emojis and a hashtag, but it's a feature request, not an escalation trigger. The mild annoyance doesn't meet the threshold for extreme frustration or abuse."
+      }
+    },
+    {
+      "thread_id": "609521",
+      "user_tweet": "@SpotifyCares Thats kinda sad.. you’ve like killed the ability to share data with @70156, which gave very useful insights.. can we know why?",
+      "brand_reply": "@166758 2: made the right folks aware that this is something you'd like to see returned in the future /J",
+      "user_author": "166758",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Feature_Request",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is expressing disappointment about a removed feature and asking for the reason, which could be seen as a complaint or inquiry, but the core request is to bring back a feature, making it a feature request. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "72084",
+      "user_tweet": "@SpotifyCares music stream stops playing (on mac) says that another device is playing.. would like to know which one… (I have sonos, ipad, iphone etc etc) so I can disconnect the other source",
+      "brand_reply": "@132183 Hmm. Could you send us your account's email address or username via DM? We'll take a look under the hood /AY https://t.co/ldFdZRiNAt",
+      "user_author": "132183",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Playback_Issue",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is experiencing a playback issue where music stops due to another device playing. This could be confused with Account_Access or Subscription_Plan, but it's primarily a playback problem. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "2865475",
+      "user_tweet": "@SpotifyCares waiting for an answer",
+      "brand_reply": "@795898 Hey Marlene, we've replied to your DM! We'll continue helping out over there 🙂 /DQ",
+      "user_author": "795898",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "General_Inquiry",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is extremely vague, only expressing that the user is waiting for a response, with no indication of the underlying issue. This makes intent classification ambiguous, but since there is no explicit escalation trigger (no security, billing, legal, abuse, human request, or safety concern), it defaults to General_Inquiry without escalation."
+      }
+    },
+    {
+      "thread_id": "1906803",
+      "user_tweet": "@SpotifyCares @ is an adress mail",
+      "brand_reply": "@568139 Hey there! For your privacy, we'd like to continue helping via DM. Can you send us one? We'll share more info backstage /PB https://t.co/ldFdZRiNAt",
+      "user_author": "568139",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "General_Inquiry",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is very short and ambiguous, mentioning an email address without clear context. It could relate to account access or billing, but without more information, it's best classified as a general inquiry. The brand's reply suggests moving to DM for privacy, which aligns with a general inquiry."
+      }
+    },
+    {
+      "thread_id": "1161814",
+      "user_tweet": "@SpotifyCares i have a verified artist page that i have no access to at all... how can i get into this?",
+      "brand_reply": "@393336 Hey! There's some more info on this here: https://t.co/bp81BuODY2. Let us know if this helps 🙂 /M https://t.co/ldFdZRiNAt",
+      "user_author": "393336",
+      "cluster_id": 13,
+      "auto_labels": {
+        "intent": "Account_Access",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is locked out of a verified artist page, which is an account access issue but not a security compromise. No escalation triggers present."
+      }
+    },
+    {
+      "thread_id": "280591",
+      "user_tweet": "@SpotifyCares It's an iPhone 7, Spotify is version 8.4.18.632 cx",
+      "brand_reply": "@182850 Thanks! Can you try restarting your device by holding Home + Lock for 10 seconds. Let us know if that helps 🙂 /DH",
+      "user_author": "182850",
+      "cluster_id": 0,
+      "auto_labels": {
+        "intent": "App_Bug_Crash",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet provides device and app version details, suggesting a technical issue, but lacks explicit description of the problem. The brand reply indicates a troubleshooting step, implying a potential app bug or crash. However, the intent could also be Playback_Issue if the problem is related to playback. The lack of clear problem statement makes classification ambiguous."
+      }
+    },
+    {
+      "thread_id": "2494003",
+      "user_tweet": "@115888 when ya updating your app to support iPhone X? App looking ugly af... xo",
+      "brand_reply": "@133507 Hey there! Thanks for sharing your thoughts. We’re working on this as we speak. Stay tuned /LP",
+      "user_author": "133507",
+      "cluster_id": 0,
+      "auto_labels": {
+        "intent": "Feature_Request",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet uses informal and slightly aggressive language ('ugly af'), but it's a feature request for app compatibility, not an escalation trigger. The frustration is not directed at support, and there's no explicit demand for a human agent."
+      }
+    },
+    {
+      "thread_id": "2280532",
+      "user_tweet": "So @SpotifyCares @115888... When can we expect iPhone X app support?",
+      "brand_reply": "@662943 Hi, we understand - we’re working on it as we speak. Stay tuned! 🔧 /BM",
+      "user_author": "662943",
+      "cluster_id": 0,
+      "auto_labels": {
+        "intent": "Feature_Request",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet asks about iPhone X app support, which could be interpreted as a general inquiry or a feature request. However, since it's requesting support for a specific device, it's classified as a feature request. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "2116879",
+      "user_tweet": "@SpotifyCares make your app compatible for iPhone X",
+      "brand_reply": "@623935 Hey! Thanks for your feedback. While we have no info to share about this, we'll make sure your thoughts about this reach the right team /MU",
+      "user_author": "623935",
+      "cluster_id": 0,
+      "auto_labels": {
+        "intent": "Feature_Request",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet asks for app compatibility with a specific device, which could be seen as a technical issue, but it's actually a feature request for optimization. No escalation triggers present."
+      }
+    },
+    {
+      "thread_id": "2298547",
+      "user_tweet": "@SpotifyCares going onto Spotify it won’t play and is linking to Ocado website from iPhone?",
+      "brand_reply": "@667203 Hi Heather! Can you send us a screenshot of what you're seeing on your end. Also, what're your phone's iOS and Spotify versions? /DV",
+      "user_author": "667203",
+      "cluster_id": 0,
+      "auto_labels": {
+        "intent": "Playback_Issue",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet describes a playback issue but also mentions an unusual redirect to Ocado website, which could indicate a security or app bug. However, no explicit security compromise or billing dispute is mentioned, so escalation is not warranted."
+      }
+    },
+    {
+      "thread_id": "2274169",
+      "user_tweet": "@115888 highlight DJs nationwide and have the option for local DJ mixes. thank me later.",
+      "brand_reply": "@661492 Hey there! Thanks for the feedback. We'll be sure to pass it on to the relevant team /AR",
+      "user_author": "661492",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Feature_Request",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is a suggestion for new features (highlighting DJs, local DJ mixes), which clearly falls under Feature_Request. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "1554527",
+      "user_tweet": "Disappointed @115888 doesn't have the Josie and the Pussycats soundtrack",
+      "brand_reply": "@480815 Hey there! Fingers crossed we'll be able to have it soon, but there's info about Spotify content here: https://t.co/0i8GpimuDa /NQ",
+      "user_author": "480815",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user expresses disappointment about a missing soundtrack, which is a content availability issue. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "2095139",
+      "user_tweet": "It’d be cool if you could look at the lyrics to a song you download right there in the app, rather than having to search for them. @115888 already does stuff with @9743 so why not make it a thing on all songs?",
+      "brand_reply": "@618970 Hi Thomas! Thanks for your feedback. We'll pass it on to the right folks. For now, you can check out SoundHound: https://t.co/k6Wv4h6tzT /RE",
+      "user_author": "618970",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Feature_Request",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is a clear feature request for in-app lyrics, but the mention of other services might confuse intent classification."
+      }
+    },
+    {
+      "thread_id": "1000261",
+      "user_tweet": "Dear @115888 , can you please take your money and let me listen to my music please 😭😭😭",
+      "brand_reply": "@356812 Hey there! We've just sent a DM your way. Let's carry on chatting there /PB",
+      "user_author": "356812",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Billing_Payment",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is vague and emotional, mentioning 'take your money' which implies a payment issue, but it's unclear if it's a billing dispute or a subscription problem. The lack of specific details makes classification tricky."
+      }
+    },
+    {
+      "thread_id": "1713312",
+      "user_tweet": "@115888 pretty sure I’ve waited over a year for you to put Beyonce’s lemonade on, its cool tho.",
+      "brand_reply": "@518912 Hey! We're working on it, and we hope to have it available soon. There's more info here: https://t.co/WI0fi3V8Cu /MT",
+      "user_author": "518912",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet expresses frustration about a song not being available, but it's a content availability issue, not a billing or account problem. The tone is sarcastic but not abusive, and there's no explicit request for escalation."
+      }
+    },
+    {
+      "thread_id": "2398321",
+      "user_tweet": "@SpotifyCares @115888 I can deal with the adverts you make us listen to every 30 minutes but when those 30 minutes are spent listening to ‘suggested tracks’ that I cannot skip it becomes a bit of a joke 🙄",
+      "brand_reply": "@690212 Hi there! Suggested Tracks is part of our Free service on mobile. More info on that here: https://t.co/eY7pHmac5R /GK",
+      "user_author": "690212",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Subscription_Plan",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is complaining about limitations of the free tier (ads and unskippable suggested tracks), which could be mistaken for a playback issue or feature request, but it's fundamentally about the subscription plan's restrictions."
+      }
+    },
+    {
+      "thread_id": "136260",
+      "user_tweet": "I'd love it if @115888 didn't have that flying-text-iOS-design crap on Android",
+      "brand_reply": "@146706 Hi there, we appreciate your feedback! Don't worry, we'll pass this on to the right team.  Let us know if you have other questions /GK",
+      "user_author": "146706",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Feature_Request",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is a feature request phrased as a complaint about design inconsistency between platforms, but it does not meet any escalation criteria."
+      }
+    },
+    {
+      "thread_id": "160563",
+      "user_tweet": "@117168 when are y’all gonna make it easier to delete songs in playlists on mobile??? 😭😭",
+      "brand_reply": "@152992 We hear you 🎧 Rest assured, your feedback will be passed on to the right folks /DF",
+      "user_author": "152992",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Feature_Request",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is asking for a feature improvement, which is a feature request, not a bug or playback issue. The emotional tone (crying emojis) might suggest frustration, but it's not extreme or abusive, so no escalation."
+      }
+    },
+    {
+      "thread_id": "1046839",
+      "user_tweet": "Anyway to set songs as ringtones @115888",
+      "brand_reply": "@367442 Hey there! We can see how this can be useful, but we have more info here: https://t.co/ulx9bR1rnT /PL",
+      "user_author": "367442",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Feature_Request",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet asks about setting songs as ringtones, which is a feature request rather than a technical issue. The brand reply acknowledges the usefulness and provides a link, indicating it's a known request. No escalation triggers present."
+      }
+    },
+    {
+      "thread_id": "2125232",
+      "user_tweet": "@115888 what do I gotta do to get the DVSN presale code? Outside of already paying a premium monthly service?",
+      "brand_reply": "@625875 Hey there. Pre-sale codes are being sent out by email to some of DVSN's biggest fans on Spotify. Hopefully you're one of them! /CB",
+      "user_author": "625875",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "General_Inquiry",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is asking about a presale code, which is not a core Spotify feature but relates to a promotional event. It could be misclassified as Content_Availability or Feature_Request, but it's a general inquiry about how to obtain something. The mention of 'paying a premium monthly service' might hint at subscription frustration, but it's not a billing dispute or escalation trigger."
+      }
+    },
+    {
+      "thread_id": "130403",
+      "user_tweet": "aye @115888 u should be able to save playlists and change them and make them personal",
+      "brand_reply": "@145412 Hi there! We have some info on how to do that at https://t.co/aGZZKzSM3w. Hope this helps. Let us know if you have any other questions /NY",
+      "user_author": "145412",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Feature_Request",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is directed at a different handle (@115888) rather than @SpotifyCares, and the phrasing is informal and ambiguous, but it clearly requests playlist personalization features, making it a feature request."
+      }
+    },
+    {
+      "thread_id": "2495281",
+      "user_tweet": "@115888 how can I purchase premium with a visa gift card",
+      "brand_reply": "@712173 Hey! Your payment card will need to meet these requirements: https://t.co/4TQhJnhAgV. Hope that helps /NQ",
+      "user_author": "712173",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Billing_Payment",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is asking about payment methods for purchasing Premium, which falls under Billing_Payment. However, it could be confused with Subscription_Plan since it involves Premium. The key is that the question is about the payment method (Visa gift card), not the plan features. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "1998820",
+      "user_tweet": "Hey @115888 what's your excuse for not having Acid Rap?",
+      "brand_reply": "@591009 Hi Eric! Sometimes agreements are ongoing, or can't be reached with the content provider. More info here: https://t.co/MEjmIRL2eB /XF",
+      "user_author": "591009",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is directed at a different handle (@115888) rather than @SpotifyCares, but the content availability question is clear. No escalation triggers present."
+      }
+    },
+    {
+      "thread_id": "2908674",
+      "user_tweet": "Dear @115888 ,\nYou said the next 30 minutes of music should be ad free, but here we are 5 minutes later with you saying watch this ad for 30 minutes of ad free music ????",
+      "brand_reply": "@805339 Hey Melissa! That doesn't sound good. Did the app crash at any point during the 30 minutes? That can cause the ad-free time to reset /LP",
+      "user_author": "805339",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Playback_Issue",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is complaining about ads interrupting music playback, which could be mistaken for a billing or subscription issue, but it's primarily a playback experience problem."
+      }
+    },
+    {
+      "thread_id": "821312",
+      "user_tweet": "You are such a disappointment @115888 Thanks to you my whole library is nowhere to me found. So pathetic.",
+      "brand_reply": "@315629 We've just sent a DM your way. Let's carry on chatting there /MT",
+      "user_author": "315629",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Playback_Issue",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is frustrated about their library disappearing, which could be a playback or content availability issue, but the core problem is accessing their saved music. The tweet contains strong negative language but is not abusive or threatening, so no escalation is needed."
+      }
+    },
+    {
+      "thread_id": "2609417",
+      "user_tweet": "@115888 I'M CASTING A CURSE ON ALL OF Y'ALL",
+      "brand_reply": "@738034 Hey there! We’d love to have all of their stuff available, but we have some info about content here: https://t.co/0i8GpimuDa /GK",
+      "user_author": "738034",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is highly emotional and contains a curse, but it's not directed at support in an abusive way; it's likely frustration over missing content. The brand reply confirms it's about content availability. No escalation triggers apply."
+      }
+    },
+    {
+      "thread_id": "1906033",
+      "user_tweet": "@115888 @SpotifyCares Actually forget that, I’ve switched to the @129773 TV Stick app 4 @115888 &amp; audio quality is better 😊🤘",
+      "brand_reply": "@268655 Hi Kay! We'd like to make sure, do you still need help with this? Just let us know, and we'll see what we can suggest 🙂 /GN",
+      "user_author": "268655",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "General_Inquiry",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is not asking for help but stating they've switched to another service; the brand reply is a follow-up. The tweet is positive and doesn't fit typical support categories, making it tricky to classify."
+      }
+    },
+    {
+      "thread_id": "1077555",
+      "user_tweet": "@115888 when are you coming to Trinidad and Tobago?! 🤔",
+      "brand_reply": "@374208 Hey! We're launching in new countries as often as possible. Be sure to add your email at https://t.co/X8DVSX9QgM /NQ",
+      "user_author": "374208",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet asks about service availability in a specific country, which could be mistaken for a general inquiry or feature request, but it's specifically about content/service availability."
+      }
+    },
+    {
+      "thread_id": "2613418",
+      "user_tweet": "Btw, was listening to @115888 on my desktop, wanted to listen on the go so I connect headphones to phone, desktop stops playing music and phone starts instead. 👊👊👊👊 #ux",
+      "brand_reply": "@738835 Hi David! Keep in mind that you can only play music on one device at a time. Sounds like it played on your phone due to Spotify Connect. More info here: https://t.co/64CIqASpvY. Hope this helps /MU",
+      "user_author": "738835",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Playback_Issue",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is describing a playback behavior issue where music stops on one device when starting on another, which could be mistaken for a feature request or general inquiry, but it's fundamentally a playback problem."
+      }
+    },
+    {
+      "thread_id": "2289634",
+      "user_tweet": "@115888 @116380 How do you still not have an Apple Watch app?",
+      "brand_reply": "@373240 Hey! Check out the official idea and add your vote to let our devs know it's something you'd like to see: https://t.co/SEK4E4gi22 /NQ",
+      "user_author": "373240",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Feature_Request",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is phrased as a complaint/question but is essentially requesting a feature (Apple Watch app). No escalation triggers present."
+      }
+    },
+    {
+      "thread_id": "1167966",
+      "user_tweet": "@115888 you should add my songs to a few playlists",
+      "brand_reply": "@394726 2: Check out https://t.co/BSrd71XWKW to help you gain visibility /JX",
+      "user_author": "394726",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Feature_Request",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is a request for Spotify to add the user's songs to playlists, which is a feature/curation request rather than a technical issue. The brand reply is generic and doesn't directly address the request, but the intent is clear."
+      }
+    },
+    {
+      "thread_id": "540375",
+      "user_tweet": "@115888 why is Quebec excluded from this [wonderful] promotion ? https://t.co/dNiAQAC6f8",
+      "brand_reply": "@245365 Currently, we’re not able to offer the Intro Offer in Quebec due to circumstances outside our control. We hope to be able to make it available in the future! /KM",
+      "user_author": "245365",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Subscription_Plan",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is asking about a promotion's availability in a specific region, which relates to subscription plans and offers. It's not a billing dispute or account issue, so no escalation is needed."
+      }
+    },
+    {
+      "thread_id": "2131387",
+      "user_tweet": "@115888 I have found another song I would like on my play list that you don’t seem to have - Easyworld - Tonight. Thank you plenty in advance for requesting this for me.",
+      "brand_reply": "@609563 Got it. We’ll have it available to you as soon as it’s available to us! Let us know if there's anything else we can do to help /DV",
+      "user_author": "609563",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is requesting a song that is not available on Spotify, which falls under Content_Availability. The polite tone and lack of urgency make escalation unnecessary."
+      }
+    },
+    {
+      "thread_id": "1426298",
+      "user_tweet": "@115888 Fix your desktop app. It's embarrassingly slow",
+      "brand_reply": "@451350 Hey! Help's here. What device, operating system, and Spotify version are you rocking? We'll see what we can suggest /RA",
+      "user_author": "451350",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "App_Bug_Crash",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is complaining about the desktop app being slow, which could be a performance issue. It's not a crash, but it's a bug/performance problem. The tone is frustrated but not abusive, and there's no explicit request for escalation. The brand reply asks for device info, indicating a standard troubleshooting approach."
+      }
+    },
+    {
+      "thread_id": "1412673",
+      "user_tweet": "@115888 can you fucking stop with the random-ass songs? I'm trying to listen to John Williams wtf is this?? https://t.co/ZhjAkccKkA",
+      "brand_reply": "@448286 2: To reduce the number of Suggested Tracks you get, try adding more artists into your playlists /LO",
+      "user_author": "448286",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Playback_Issue",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is frustrated about random songs interrupting their listening, which could be seen as a playback issue or content availability. The tweet contains profanity but it's not directed at support as abuse; it's expressing frustration about the service. The brand reply suggests it's about suggested tracks, which is a feature behavior, but the user's intent is about playback experience."
+      }
+    },
+    {
+      "thread_id": "1037796",
+      "user_tweet": "@115888 just crashed my #XboxOne ...",
+      "brand_reply": "@365509 Hi Michael. Can you tell us exactly what happened? We'll see what we can suggest /JU",
+      "user_author": "365509",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "App_Bug_Crash",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is very brief and lacks detail, but the mention of a crash on Xbox One clearly indicates an app bug/crash issue. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "2052963",
+      "user_tweet": "Disappointed that @115888 doesn’t have a native Apple Watch app.",
+      "brand_reply": "@146675 Hey Jordan! Check out the official idea and add your vote to let our devs know it's something you'd like to see: https://t.co/SEK4E4gi22 /LO",
+      "user_author": "146675",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Feature_Request",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet expresses disappointment about a missing feature, which could be mistaken for a complaint, but it's a feature request. The brand reply directs to an idea submission, confirming this classification."
+      }
+    },
+    {
+      "thread_id": "2259648",
+      "user_tweet": "Wtf. If you disconnect a Bluetooth speaker/cans, @115888 for ios continues to play via phone speaker now. That's a huge change :(",
+      "brand_reply": "@657983 Hey there! What device and Spotify version are you using? We'll see what we can suggest /BH",
+      "user_author": "657983",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Playback_Issue",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is reporting a playback issue where audio continues on the phone speaker after disconnecting Bluetooth, which could be seen as an app bug, but the primary complaint is about playback behavior. The tweet includes frustration ('Wtf') but not directed at support, so no escalation."
+      }
+    },
+    {
+      "thread_id": "1850300",
+      "user_tweet": "Every 4Minute song has the wrong name on my @115888",
+      "brand_reply": "@553937 Hey there! Can you send us the artist link? Just tap the three dots &gt; Share &gt; Copy Link. We'll check what's happening backstage /JP",
+      "user_author": "553937",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet mentions wrong song names, which could be interpreted as a metadata issue (Content_Availability) or a playback issue. However, since it's about incorrect information rather than playback failure, Content_Availability is more appropriate. The mention of '@115888' is likely a typo or placeholder, not a real handle, which adds ambiguity."
+      }
+    },
+    {
+      "thread_id": "2055167",
+      "user_tweet": "Why aren't the GOOD #TwilightSaga soundtracks on @115888 @117168 ???? (As in, the first two...)",
+      "brand_reply": "@607820 Hey, we do our best! But sometimes agreements are ongoing, or can't be reached with the content provider /RB",
+      "user_author": "607820",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is asking about missing soundtracks, which is a content availability issue. The tweet includes hashtags and mentions, but the core intent is clear. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "832608",
+      "user_tweet": "@115888 can y’all stop trying to make me listen to bhad bhabie? thanks",
+      "brand_reply": "@318304 Hey Alora! We hear you. Can you tell us what's happening exactly? We'll see what we can suggest /CH",
+      "user_author": "318304",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is a complaint about music recommendations, which could be seen as a feature request or general inquiry, but it specifically relates to the availability and promotion of certain content, making Content_Availability the best fit. The tone is frustrated but not abusive, and there's no explicit request for escalation."
+      }
+    },
+    {
+      "thread_id": "1839357",
+      "user_tweet": "I don't think @115888 knows the difference between @12899 and @131175 https://t.co/1djT6xreQY",
+      "brand_reply": "@551247 Hey Stephanie, that's odd! Can you let us know the device, Android, and Spotify version you're using? We'll see what we can suggest /JE",
+      "user_author": "551247",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "General_Inquiry",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is ambiguous and contains obfuscated references (numbers instead of names), making it hard to determine the exact issue. The brand reply suggests a playback or app issue, but the tweet itself doesn't clearly indicate a specific category."
+      }
+    },
+    {
+      "thread_id": "2708585",
+      "user_tweet": "@115888 should have an alarm feature so I can wake up to my @12899 soundtrack every morning. Just saying.......",
+      "brand_reply": "@760616 We can see how that’d be handy. Thanks for taking the time to reach out – your feedback's been noted 📝 /DF",
+      "user_author": "760616",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Feature_Request",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is a casual suggestion for a new feature, not a complaint or issue. It's straightforward to classify as a feature request, and there's no need for escalation."
+      }
+    },
+    {
+      "thread_id": "2673475",
+      "user_tweet": "@116130 @115888 @SpotifyCares the lack of Britney Spears in your Easy 90s and Easy 00s playlists hurts me! 😔",
+      "brand_reply": "@133327 Hey there! We hear you. Our Curation team are independent. Rest assured, your feedback will be passed on to the right folks /RS",
+      "user_author": "133327",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user expresses disappointment about missing content (Britney Spears) in playlists, which is a content availability issue. The emotional language ('hurts me') is not extreme or abusive, so no escalation is needed."
+      }
+    },
+    {
+      "thread_id": "1951412",
+      "user_tweet": "@115888 ABSOLUTELY FUMING with you. Wasted TWO email addresses signing up. Won’t give me the username I chose, instead it’s like wvm74hsjs…",
+      "brand_reply": "@579537 Hi. It's currently not possible to pick a username at sign-up, but you can add a display name. That's what other Spotify users will see /QI",
+      "user_author": "579537",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Account_Access",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is frustrated about username assignment during signup, which relates to account access. The all-caps and 'ABSOLUTELY FUMING' could be seen as extreme frustration, but it's not directed at support agents and doesn't meet the escalation threshold."
+      }
+    },
+    {
+      "thread_id": "2709286",
+      "user_tweet": "@115888 stop ruining my playlists with recommendations please &amp; thank you",
+      "brand_reply": "@760808 Hey there! Thank you for the feedback. We'll pass it on to the corresponding team. Let us know if you need anything else /LF",
+      "user_author": "760808",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Feature_Request",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is expressing frustration about recommendations in playlists, which could be seen as a complaint, but it's essentially a request to change a feature. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "2215855",
+      "user_tweet": "@115888 its 2017 wheres the visualizer at?",
+      "brand_reply": "@190825 Hey there! You can add your vote for the idea to let our devs know it's something you'd like to see: https://t.co/mUP55foYB3 /AR",
+      "user_author": "190825",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Feature_Request",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is phrased as a question ('wheres the visualizer at?') which could be mistaken for a general inquiry, but the context of the brand reply (asking to vote for the idea) confirms it's a feature request. No escalation triggers present."
+      }
+    },
+    {
+      "thread_id": "177415",
+      "user_tweet": "@115888 @116130 ads are playing back considerably louder than music even with normalise enabled - it's an unpleasant shock every time and fills me with resentment for the brand, not the desire to upgrade to premium. It's also damaging to hearing. Please fix.",
+      "brand_reply": "@157773 Hey George! Thanks for your feedback - we'll pass it on. For now, check out https://t.co/zgnxs5kPEu if you haven't had a subscription before /RA",
+      "user_author": "157773",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Playback_Issue",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user complains about ad volume being louder than music, which is a playback issue. There is frustration and a mention of hearing damage, but it does not meet escalation criteria like safety concerns or explicit request for human agent."
+      }
+    },
+    {
+      "thread_id": "1828857",
+      "user_tweet": "I don't understand why @115888 has censored music. Like when 2Pac comes on it's like a mad lib, insert words and have fun...",
+      "brand_reply": "@548846 Hey Mike! Spotify doesn’t censor music – we make it available in whatever form it’s given to us. More info here: https://t.co/8oSIltuHIG /NY",
+      "user_author": "548846",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is complaining about censored music, which could be mistaken for a playback issue or a general inquiry, but it's specifically about the availability of uncensored content."
+      }
+    },
+    {
+      "thread_id": "262672",
+      "user_tweet": "@115888 your mobile apps are so full of bugs!!! Dislike 1 song won't let you like or dislike anyother song for the next 200 songs.",
+      "brand_reply": "@178573 2: Can you also let us know the device, operating system, and Spotify version you're using? We'll see what we can suggest /JE",
+      "user_author": "178573",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "App_Bug_Crash",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user expresses frustration with exclamation marks but not extreme or abusive language. The issue is a clear app bug affecting playback controls, so no escalation is needed."
+      }
+    },
+    {
+      "thread_id": "1215718",
+      "user_tweet": ".@115888 has chosen to give me lots of @12324 ads and I DO NOT APPRECIATE IT.",
+      "brand_reply": "@405272 Sorry, we didn't mean to cause any offense or to scare you! We'll pass your feedback on to our Ads team /WW",
+      "user_author": "405272",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "General_Inquiry",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet expresses frustration about ads but does not clearly fit into a specific category like Billing or Feature Request. It's a general complaint about ad frequency, so General_Inquiry is the best fit. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "1826274",
+      "user_tweet": "hello @115888 please give us the option to \"clear all\" for the \"recently played\" section 🙏",
+      "brand_reply": "@548174 Hey there. We can see how that’d be useful! You can vote for the official idea here: https://t.co/KKJ7MP4h4F /NS",
+      "user_author": "548174",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Feature_Request",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is a clear feature request, but the mention of a specific user handle (@115888) instead of @SpotifyCares could be confusing; however, the context of the brand reply confirms it's directed at SpotifyCares."
+      }
+    },
+    {
+      "thread_id": "2514281",
+      "user_tweet": "@115888 please want to add cryogenic - rocking hard 👏👏👏",
+      "brand_reply": "@365140 Hey there. We’ll have it available to you as soon as it’s available to us! https://t.co/0i8GpimuDa /TC",
+      "user_author": "365140",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is informal and contains a request to add a song/artist, which could be mistaken for a feature request, but it's specifically about content availability. The brand reply confirms this by saying they'll make it available when they can."
+      }
+    },
+    {
+      "thread_id": "2864075",
+      "user_tweet": "SpotifyWebHelper process is using 100% CPU even on idle when not listening. WTF @115888",
+      "brand_reply": "@795554 Hey Gaël! Can you reinstall the app by following the steps here and restart your device: https://t.co/EqisDMwZAT? Does that help? /KC",
+      "user_author": "795554",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "App_Bug_Crash",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet mentions high CPU usage, which could be seen as a performance issue, but it's specifically about the SpotifyWebHelper process, indicating a software bug. The use of 'WTF' shows frustration but is not abusive or directed at support, so no escalation."
+      }
+    },
+    {
+      "thread_id": "555485",
+      "user_tweet": "@115888  https://t.co/Y6i5hH6j3J",
+      "brand_reply": "@249701 Hey there! What device (make &amp; model), operating system, and app version are you using? Also, are you rocking Spotify Free or Premium? We'll be right here waiting /LP",
+      "user_author": "249701",
+      "cluster_id": 12,
+      "auto_labels": {
+        "intent": "General_Inquiry",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet contains only a mention and a link, with no explicit text describing the issue. The brand reply asks for device and subscription details, suggesting a support request, but the intent is ambiguous. Classified as General_Inquiry due to lack of specific information."
+      }
+    },
+    {
+      "thread_id": "2895461",
+      "user_tweet": "https://t.co/D4HYdx8qp9",
+      "brand_reply": "@802395 Hey there, help's here! Could you DM us your account's email address? We'll take a look backstage /CG https://t.co/ldFdZRiNAt",
+      "user_author": "802395",
+      "cluster_id": 12,
+      "auto_labels": {
+        "intent": "General_Inquiry",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet contains only a URL with no text, making the intent ambiguous. The brand's reply asking for account email suggests a possible account-related issue, but without explicit content, it's classified as a general inquiry."
+      }
+    },
+    {
+      "thread_id": "2600423",
+      "user_tweet": "@SpotifyCares https://t.co/CoLMV9xixb\n\nShould be \"A Life in the Day of Benjamin André (Incomplete)\"",
+      "brand_reply": "@736100 Thanks. We'll get this reported. Great detective work! https://t.co/LpsmyUtme0 /DV",
+      "user_author": "736100",
+      "cluster_id": 12,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is very short and includes a link, but the context of the brand reply indicates it's about incorrect song metadata or content, fitting Content_Availability. No escalation triggers present."
+      }
+    },
+    {
+      "thread_id": "897192",
+      "user_tweet": "@SpotifyCares https://t.co/O67SqKTB5G",
+      "brand_reply": "@333053 Hey there! We'd like to help. Can you tell us what's happening exactly? We'll be waiting for your reply /RK",
+      "user_author": "333053",
+      "cluster_id": 12,
+      "auto_labels": {
+        "intent": "General_Inquiry",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet contains only a link with no text, making the intent ambiguous. The brand reply asks for clarification, indicating the original tweet lacked sufficient information to determine a specific category."
+      }
+    },
+    {
+      "thread_id": "2861308",
+      "user_tweet": "@SpotifyCares  https://t.co/X7yxgIgTE5",
+      "brand_reply": "@794905 Hey there! Are you getting any specific error messages when you try to log in? Also, can you DM us your account's email address? We'll check things out /KC https://t.co/ldFdZRiNAt",
+      "user_author": "794905",
+      "cluster_id": 12,
+      "auto_labels": {
+        "intent": "Account_Access",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet contains only a link with no text, so the intent must be inferred from the brand's reply, which asks about login errors and requests the account email—indicating an account access issue."
+      }
+    },
+    {
+      "thread_id": "2947627",
+      "user_tweet": "@SpotifyCares Is there really no way to disconnect my spotify account from facebook if disconnect button is not an option in settings??",
+      "brand_reply": "@682805 Hey there, help's here! Can you DM us your account's username and email address? We'll take a look backstage /TF",
+      "user_author": "682805",
+      "cluster_id": 10,
+      "auto_labels": {
+        "intent": "Account_Access",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is asking about disconnecting their Spotify account from Facebook, which relates to account management and access. It's not a security compromise or billing issue, so no escalation needed. The tricky part is distinguishing between account access and general inquiry, but since it's about account settings, Account_Access is appropriate."
+      }
+    },
+    {
+      "thread_id": "1934180",
+      "user_tweet": "@3493 I really want to come over but when Groove/Play Music/iTunes all have the clean version of a recent album and you don't that's a problem.",
+      "brand_reply": "@254137 1: Hi! Spotify doesn’t censor music – we make it available in whatever form it’s given to us. More info here: https://t.co/8oSIltuHIG.",
+      "user_author": "254137",
+      "cluster_id": 10,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is complaining about a specific album being unavailable in its explicit version, which falls under content availability. The mention of other platforms could be misconstrued as a subscription comparison, but the core issue is content availability."
+      }
+    },
+    {
+      "thread_id": "2809",
+      "user_tweet": ".@SpotifyCares any way to block this particular ad? Happy with ads/dont want premium. Just this ad is really hard to watch over and over and over. Please help. https://t.co/MsW8FjmKw1",
+      "brand_reply": "@116377 Hey there! Thanks for taking the time to reach out – we'll pass your feedback on to our Ads team /NQ",
+      "user_author": "116377",
+      "cluster_id": 10,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is asking about blocking a specific ad, which could be seen as a feature request or content issue. However, since it's about ad content and not a technical problem, Content_Availability is the best fit. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "700656",
+      "user_tweet": "@115888 I would really like you to explain..",
+      "brand_reply": "@287224 @115888 Hey! We've just sent a DM your way. Let's carry on chatting there /AN",
+      "user_author": "287224",
+      "cluster_id": 10,
+      "auto_labels": {
+        "intent": "General_Inquiry",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is extremely vague, lacking any specific issue or request, making intent classification ambiguous. The brand reply suggests a DM was sent, but the original tweet provides no clear category cues."
+      }
+    },
+    {
+      "thread_id": "571366",
+      "user_tweet": "@SpotifyCares trying to cancel my account is frustrating. Please help! Msg has already been sent. Thanks.",
+      "brand_reply": "@254220 Hi there! Apologies for the delay. We've just sent you a bit more info over DM. We'll carry on helping out there /JS",
+      "user_author": "254220",
+      "cluster_id": 6,
+      "auto_labels": {
+        "intent": "Subscription_Plan",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user expresses frustration but it's about the cancellation process, not billing disputes or security. No explicit request for human agent or abusive language, so no escalation."
+      }
+    },
+    {
+      "thread_id": "2402483",
+      "user_tweet": "@SpotifyCares I’m struggling to get  into my account and none of the online help activities helps as I can’t log in to ask the q! #help #spotify #SpotifyPremium",
+      "brand_reply": "@691179 Hey, help's here! Can you DM us your account's email address? We'll check backstage /GK https://t.co/ldFdZRiNAt",
+      "user_author": "691179",
+      "cluster_id": 6,
+      "auto_labels": {
+        "intent": "Account_Access",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "User is unable to log in and cannot access online help, but there is no indication of security compromise, billing dispute, or explicit request for human agent. The frustration is mild and directed at the situation, not at support."
+      }
+    },
+    {
+      "thread_id": "2787979",
+      "user_tweet": "@SpotifyCares hi, I’ve tried upgrading to premium on both my iPhone (using Safari) and my PC (using Chrome), but when I click on my account settings it comes up with either error 503 or error 504. would appreciate it if you could help me with this! :)",
+      "brand_reply": "@778291 Hey there, help's here! Does clearing your cache/cookies help? You might also want to try using an incognito window. Let us know how it goes /MX",
+      "user_author": "778291",
+      "cluster_id": 6,
+      "auto_labels": {
+        "intent": "Subscription_Plan",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is trying to upgrade to Premium but encounters server errors (503/504) when accessing account settings. This could be classified as App_Bug_Crash or Playback_Issue, but the core action is subscription upgrade, making Subscription_Plan the most appropriate. No escalation triggers present."
+      }
+    },
+    {
+      "thread_id": "2023301",
+      "user_tweet": "@SpotifyCares Hi. My Spotify premium account has stopped working. I cancelled and redownloaded it and still no luck. Can you help?",
+      "brand_reply": "@598387 Hey Elaine, help's here! Can you DM us your account's email address? We'll take a look backstage /SJ https://t.co/ldFdZRiNAt",
+      "user_author": "598387",
+      "cluster_id": 6,
+      "auto_labels": {
+        "intent": "Subscription_Plan",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user mentions a Premium account that has stopped working, which could be interpreted as a playback issue or account access problem, but the core issue is about the subscription not functioning as expected. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "44691",
+      "user_tweet": "@SpotifyCares I can't update my current username (it is gc_89). It only allows me to change my email. I also can't connect to FB :( Pls Help",
+      "brand_reply": "@125921 2: For more info on how to connect a Facebook profile to your Spotify account check: https://t.co/fI2NF40484 /TY",
+      "user_author": "125921",
+      "cluster_id": 6,
+      "auto_labels": {
+        "intent": "Account_Access",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user reports inability to update username and connect to Facebook, which could be seen as a technical issue or account access problem. However, it's not a security compromise or billing dispute, so no escalation. The intent is classified as Account_Access because it involves account settings and connectivity."
+      }
+    },
+    {
+      "thread_id": "726217",
+      "user_tweet": "@SpotifyCares I'm not receiving any Spotify emails. Tried removing my account, but don't receive the confirmation link. Please help!",
+      "brand_reply": "@293958 Hi Naomi! Can you let us know more about the email that you're expecting to receive? We'll be waiting for your reply /MG",
+      "user_author": "293958",
+      "cluster_id": 6,
+      "auto_labels": {
+        "intent": "Account_Access",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is trying to remove their account but cannot receive the confirmation email, which is an account access issue. However, it could also be interpreted as a general inquiry about email delivery. The lack of escalation triggers makes it straightforward."
+      }
+    },
+    {
+      "thread_id": "572685",
+      "user_tweet": "@SpotifyCares having trouble downloading music on the galaxy s8, send help",
+      "brand_reply": "@254570 Hi! We've just replied to your DM. Let's carry on chatting there /AP",
+      "user_author": "254570",
+      "cluster_id": 6,
+      "auto_labels": {
+        "intent": "Playback_Issue",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The issue is about downloading music, which could be seen as a playback issue or app bug, but since it's specific to a device and not a crash, playback issue is more appropriate. No escalation triggers present."
+      }
+    },
+    {
+      "thread_id": "1899559",
+      "user_tweet": "@SpotifyCares No songs are \"available\" at the moment for me. I've tried web player and desktop client. Please help!",
+      "brand_reply": "@566117 Hi Jenna, help's here! Could you DM us your username and email address? Also, have you tried any other devices? We'll do some digging 🔍 /JQ https://t.co/ldFdZRiNAt",
+      "user_author": "566117",
+      "cluster_id": 6,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user reports that no songs are available, which could be interpreted as a playback issue or content availability. However, the phrasing 'No songs are available' points to content availability rather than a playback error. The brand's reply asks for more details, indicating a standard troubleshooting step."
+      }
+    },
+    {
+      "thread_id": "2219843",
+      "user_tweet": "@SpotifyCares dm me back pls i’m trying to help out my dad (:",
+      "brand_reply": "@648417 Hey! We've just replied to your DM. We'll carry on helping out there /KM",
+      "user_author": "648417",
+      "cluster_id": 6,
+      "auto_labels": {
+        "intent": "General_Inquiry",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is vague and doesn't specify the issue, making it hard to categorize. It's a request for DM response, likely to discuss a problem, but without details, it falls under general inquiry. No escalation triggers present."
+      }
+    },
+    {
+      "thread_id": "129250",
+      "user_tweet": "@115888 i found out that ive been getting charged with a premium in my itunes “subscription” but i have been unsubscribed since september and i’m just on my free account, i can’t find any help feature to reach out to your app CS",
+      "brand_reply": "@145104 Hey there! Can you DM us your account's email address? We'll take a look /RB https://t.co/ldFdZRiNAt",
+      "user_author": "145104",
+      "cluster_id": 6,
+      "auto_labels": {
+        "intent": "Billing_Payment",
+        "should_escalate": true,
+        "escalation_reason": "Billing/payment dispute - user reports being charged for a subscription they unsubscribed from",
+        "difficulty_notes": "The user mentions both a billing issue and difficulty finding help, but the core issue is a billing dispute, which triggers escalation."
+      }
+    },
+    {
+      "thread_id": "1517726",
+      "user_tweet": "@SpotifyCares hi! when will u upload btob's new album brother act 🤗",
+      "brand_reply": "@472121 Hey there! We’d love to have all of their stuff available, but we have some info about content here: https://t.co/MEjmIRL2eB /RV",
+      "user_author": "472121",
+      "cluster_id": 5,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is asking about the availability of a specific album, which falls under Content_Availability. The polite tone and lack of escalation triggers make it straightforward."
+      }
+    },
+    {
+      "thread_id": "2203673",
+      "user_tweet": "So, umm, where is Ezra Bell's Farewell Griffin @115888 ???? That album was my crack",
+      "brand_reply": "@644348 Hey! Fingers crossed we'll be able to have it soon, but there's info about Spotify content here: https://t.co/0i8GpimuDa /DF",
+      "user_author": "644348",
+      "cluster_id": 5,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is asking about a specific album's availability, which falls under Content_Availability. The informal language and metaphor ('my crack') might be tricky, but it's not abusive or escalating."
+      }
+    },
+    {
+      "thread_id": "1188290",
+      "user_tweet": "@SpotifyCares https://t.co/NBeh1dmYEa\n\nhttps://t.co/6ty36su78y\n\nCountry set Germany, I think. \nThe song title/ album cover glitched on my computer.",
+      "brand_reply": "@399439 Thanks. Everything looks good on our end. Just to check, are there local file versions of the tracks synced to your device? /NS",
+      "user_author": "399439",
+      "cluster_id": 5,
+      "auto_labels": {
+        "intent": "Playback_Issue",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet includes links and mentions a glitch with song title/album cover, which could be interpreted as an app bug or playback issue. The brand reply focuses on local files, suggesting a playback-related problem. No escalation triggers present."
+      }
+    },
+    {
+      "thread_id": "2218927",
+      "user_tweet": "@SpotifyCares Hi im just wondering if when are you going to upload the Reputation album?",
+      "brand_reply": "@648195 Taylor Swift's 'Reputation' isn't available to stream just yet – stay tuned! For now, check out the singles: https://t.co/3h0TnPWP0c /MU",
+      "user_author": "648195",
+      "cluster_id": 5,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is asking about the availability of a specific album, which falls under Content_Availability. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "1600787",
+      "user_tweet": "Will BTOB's Complete album ever comeback on spotify? @SpotifyCares",
+      "brand_reply": "@491487 Hey! We’d love to have all of their stuff available, but we have some info about content here: https://t.co/0i8GpimuDa /NQ",
+      "user_author": "491487",
+      "cluster_id": 5,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is asking about the availability of a specific album on Spotify, which falls under Content_Availability. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "1436769",
+      "user_tweet": "@SpotifyCares when are y’all going to put twice’s new album “likey”?",
+      "brand_reply": "@453545 Hi there! We’d love to have all of TWICE's stuff available, but we have some info about content here: https://t.co/0i8GpimuDa /LP",
+      "user_author": "453545",
+      "cluster_id": 5,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is asking about the availability of a specific album, which falls under Content_Availability. The brand reply confirms this by providing info about content availability. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "1642857",
+      "user_tweet": "@SpotifyCares I keep getting notified that my account is being used somewhere else but I have logged out everywhere and changed my password",
+      "brand_reply": "@502162 Hi Katie. Don't worry, help's here. Can you DM us your username or email address so we can check? /JU https://t.co/ldFdZRiNAt",
+      "user_author": "502162",
+      "cluster_id": 4,
+      "auto_labels": {
+        "intent": "Account_Access",
+        "should_escalate": true,
+        "escalation_reason": "Account security compromise (unauthorized access)",
+        "difficulty_notes": "User has already taken security measures (logged out everywhere, changed password) but still receives notifications, indicating potential ongoing compromise. This triggers escalation due to security concerns."
+      }
+    },
+    {
+      "thread_id": "647116",
+      "user_tweet": "@SpotifyCares keep getting the message “Spotify has paused cos your account is being used elsewhere” I’ve logged out of all my accounts but it’s still happening. Whoever is using my account is listening to Xmas music in November, unforgivable! https://t.co/K8kkzHkhLD",
+      "brand_reply": "@273705 Hey Tom! We’re sorry to hear that. Check out https://t.co/QHn3ok8y2n for what to do next /TF",
+      "user_author": "273705",
+      "cluster_id": 4,
+      "auto_labels": {
+        "intent": "Account_Access",
+        "should_escalate": true,
+        "escalation_reason": "Account security compromise (unauthorized access)",
+        "difficulty_notes": "The user reports unauthorized access, which triggers escalation, but the tone is lighthearted with a joke about Christmas music, so it might be tempting to not escalate. However, the security concern is clear."
+      }
+    },
+    {
+      "thread_id": "1507635",
+      "user_tweet": "@SpotifyCares \rI canceled my account,, and you still automatically bill me?  Is this Columbia House records?\r#spotifycares_about your money",
+      "brand_reply": "@469918 Hey! We'll check that out backstage. Can you DM us your account's username and email address? /JL https://t.co/ldFdZRiNAt",
+      "user_author": "469918",
+      "cluster_id": 4,
+      "auto_labels": {
+        "intent": "Billing_Payment",
+        "should_escalate": true,
+        "escalation_reason": "Billing/payment dispute - user claims they were charged after canceling their account",
+        "difficulty_notes": "The user is expressing frustration with a billing issue, which triggers escalation. The sarcastic tone might be mistaken for general frustration, but the core issue is a billing dispute."
+      }
+    },
+    {
+      "thread_id": "2706983",
+      "user_tweet": "@SpotifyCares I got an email to confirm my account and then another email a few hours later confirming my account has been set up but have never tried to set up an account.",
+      "brand_reply": "@760222 Hey Justin! Can you DM us the email address that was used to create a Spotify account? We'll check it out /MG https://t.co/ldFdZRiNAt",
+      "user_author": "760222",
+      "cluster_id": 4,
+      "auto_labels": {
+        "intent": "Account_Access",
+        "should_escalate": true,
+        "escalation_reason": "Account security compromise - user received account setup emails for an account they never created, indicating potential unauthorized access",
+        "difficulty_notes": "The user is not reporting a login issue but rather an unsolicited account creation, which falls under account security concerns rather than typical access problems."
+      }
+    },
+    {
+      "thread_id": "656476",
+      "user_tweet": "@SpotifyCares i am trying to sign up for a premium subscription using my paypal account, however it keeps taking me back to the payment method screen and not signing up for premium",
+      "brand_reply": "@276195 Hi there. Don't worry, we'll look into this. First up, can you DM us your username or email address? /JU https://t.co/ldFdZRiNAt",
+      "user_author": "276195",
+      "cluster_id": 4,
+      "auto_labels": {
+        "intent": "Billing_Payment",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The issue involves a payment method (PayPal) during subscription signup, which could be classified as Subscription_Plan or Billing_Payment. However, since the core problem is the payment method not working, Billing_Payment is more appropriate. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "2293828",
+      "user_tweet": "@SpotifyCares I have been loved out of my account &amp; when I try to log back in it says account not registered. Please can you help?",
+      "brand_reply": "@666091 Hi Kate, we're here to help! Can you send us the username or email address on your account via DM? We'll take a look backstage /GN https://t.co/ldFdZRiNAt",
+      "user_author": "666091",
+      "cluster_id": 4,
+      "auto_labels": {
+        "intent": "Account_Access",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is locked out of their account, which could be a security issue, but there's no explicit mention of hacking or unauthorized access, so it doesn't meet the escalation criteria."
+      }
+    },
+    {
+      "thread_id": "1934526",
+      "user_tweet": "@SpotifyCares  I deleted my Facebook account  &amp; now cannot login :( or contact you any other way.",
+      "brand_reply": "@575610 Hey, help's arrived! Could you send us a DM with your Facebook account's email address? We'll check things backstage /CH https://t.co/ldFdZRiNAt",
+      "user_author": "575610",
+      "cluster_id": 4,
+      "auto_labels": {
+        "intent": "Account_Access",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "User cannot log in after deleting Facebook account, which is an account access issue but not a security compromise or billing dispute. The mention of not being able to contact any other way might suggest frustration, but it's not extreme or abusive."
+      }
+    },
+    {
+      "thread_id": "2052776",
+      "user_tweet": "@SpotifyCares How do I go about recovering my account?",
+      "brand_reply": "@607085 Hi there, help's here! Can you DM us with any possible email addresses that could be associated with your account? We'll check it out /WW https://t.co/ldFdZRiNAt",
+      "user_author": "607085",
+      "cluster_id": 4,
+      "auto_labels": {
+        "intent": "Account_Access",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is asking about account recovery, which could potentially involve unauthorized access, but there is no explicit mention of hacking or security compromise. The request is a general inquiry about the recovery process, so it does not meet the escalation criteria."
+      }
+    },
+    {
+      "thread_id": "2095520",
+      "user_tweet": "Hey @SpotifyCares money is being taken out of my account but i forgot my email and password.  What can i do?",
+      "brand_reply": "@619074 Hey Gustavo, help's here! Could you send us a DM with any possible email addresses or usernames you might've used for Spotify? /AY https://t.co/ldFdZRiNAt",
+      "user_author": "619074",
+      "cluster_id": 4,
+      "auto_labels": {
+        "intent": "Account_Access",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet mentions both unauthorized charges (billing) and forgotten login credentials (account access). The primary issue is account access, but the billing aspect could be seen as a dispute. However, the user is not disputing the charges, just noting them while seeking account recovery help."
+      }
+    },
+    {
+      "thread_id": "905405",
+      "user_tweet": "@151631 why can't I listen to downloaded music offline on android? I'm able to on iPhone. Still Premium account. Thanks.",
+      "brand_reply": "@334942 Hey there! Could you DM us your account's email address or username? We'll see what we can suggest /RE https://t.co/ldFdZRiNAt",
+      "user_author": "334942",
+      "cluster_id": 4,
+      "auto_labels": {
+        "intent": "Playback_Issue",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user reports a platform-specific issue with offline playback despite having a Premium account, which could be mistaken for a subscription or content availability issue, but it's fundamentally a playback problem."
+      }
+    },
+    {
+      "thread_id": "1464514",
+      "user_tweet": "@SpotifyCares hi I️ can’t figure out my email I️ used to create my account so im unable to change any of my settings pls help me",
+      "brand_reply": "@459933 Hi there! Can you DM us any email addresses or usernames you might've used to create an account? We'll take a look backstage /NQ https://t.co/ldFdZRiNAt",
+      "user_author": "459933",
+      "cluster_id": 4,
+      "auto_labels": {
+        "intent": "Account_Access",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "User cannot recall the email associated with their account, which is an account access issue but not a security compromise or explicit escalation request."
+      }
+    },
+    {
+      "thread_id": "1833909",
+      "user_tweet": "@SpotifyCares I cancelled my account but you still charging me for premium I want it stopped",
+      "brand_reply": "@550104 Hi! Help's here. Can you DM us your account's username and email address? We'll take a closer look /SV https://t.co/ldFdZRiNAt",
+      "user_author": "550104",
+      "cluster_id": 4,
+      "auto_labels": {
+        "intent": "Billing_Payment",
+        "should_escalate": true,
+        "escalation_reason": "Billing/payment dispute - user reports being charged after cancellation and demands it stop",
+        "difficulty_notes": "The user mentions cancelling their account, which could be confused with Account_Access or Subscription_Plan, but the core issue is an unauthorized charge after cancellation, making it a billing dispute that requires escalation."
+      }
+    },
+    {
+      "thread_id": "1098802",
+      "user_tweet": "@SpotifyCares My account was created with Facebook. Recently I changed my FB email which hasnt been updated on Spotify and I cant change it.",
+      "brand_reply": "@379285 Hey! Can you DM us your account's current email address? We'll see what we can suggest /JL https://t.co/ldFdZRiNAt",
+      "user_author": "379285",
+      "cluster_id": 4,
+      "auto_labels": {
+        "intent": "Account_Access",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is unable to update their email due to Facebook integration, which is an account access issue but not a security compromise or billing dispute, so no escalation is needed."
+      }
+    },
+    {
+      "thread_id": "447881",
+      "user_tweet": "@SpotifyCares can't login with my Spotify account. Neither Android app not website. Known issue?",
+      "brand_reply": "@221116 Hey Anna! Everything seems to check out on our end. Could you DM us your account's email address or username? We'll take a look backstage /JE https://t.co/ldFdZRiNAt",
+      "user_author": "221116",
+      "cluster_id": 4,
+      "auto_labels": {
+        "intent": "Account_Access",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user reports inability to log in on both app and website, which is a clear Account_Access issue. No security compromise, billing dispute, legal threat, extreme frustration, request for human, or safety concern, so no escalation."
+      }
+    },
+    {
+      "thread_id": "2070393",
+      "user_tweet": "@SpotifyCares Is there any way to add a playlist I made on Sonos to my connected Spotify account? Or any spotify account for that matter",
+      "brand_reply": "@612289 Hey! This isn't possible right now, but you can suggest it in our Community at https://t.co/rtDvYZOF32 to help make this idea happen /CH",
+      "user_author": "612289",
+      "cluster_id": 4,
+      "auto_labels": {
+        "intent": "Feature_Request",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is asking about a capability that doesn't exist, which could be seen as a general inquiry, but the underlying request is for a new feature (importing playlists from Sonos). The brand reply confirms it's not possible and suggests submitting it as an idea, indicating it's a feature request."
+      }
+    },
+    {
+      "thread_id": "156976",
+      "user_tweet": "@SpotifyCares Hi, I have an issue - i use spotify via Facebook and accidentaly made another account, where I purchased premium. Now I`m trying to connect my FB account to the one where I paid for premium, but it reports me some kind of error. Can u help me solve this?",
+      "brand_reply": "@152056 Hey Jerry, we'd be happy to help! Could you DM us the email address and username for both accounts? We'll check this out backstage /BX https://t.co/ldFdZRiNAt",
+      "user_author": "152056",
+      "cluster_id": 4,
+      "auto_labels": {
+        "intent": "Account_Access",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user has multiple issues: account linking error, premium purchase on wrong account, and Facebook login. The core problem is account access/linking, but it also touches on billing and subscription. No escalation triggers present."
+      }
+    },
+    {
+      "thread_id": "39734",
+      "user_tweet": "@SpotifyCares any idea where my search keeps going? If I close and reopen it comes back. iOS 11.1 Spotify v8.4.25.906 https://t.co/wMXRSH7jZ8",
+      "brand_reply": "@124701 Hey Nathan, that's odd. Can you try logging out, restarting your device, then logging back in? Does that help? /JE",
+      "user_author": "124701",
+      "cluster_id": 1,
+      "auto_labels": {
+        "intent": "App_Bug_Crash",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user reports a disappearing search bar that reappears after restarting the app, which is a UI bug. It could be mistaken for a playback issue or general inquiry, but the specific behavior points to an app bug."
+      }
+    },
+    {
+      "thread_id": "2347870",
+      "user_tweet": "@115888 Why does Spotify connect to different devices without my confirmation. I’m sitting at home connecting to my neighbors devices",
+      "brand_reply": "@678761 Hi Louis. Don't worry, help's here! Can you DM us your account's email address or username? We'll take a look backstage /XF https://t.co/ldFdZRiNAt",
+      "user_author": "678761",
+      "cluster_id": 1,
+      "auto_labels": {
+        "intent": "Account_Access",
+        "should_escalate": true,
+        "escalation_reason": "Potential account security compromise - unauthorized connections to other devices",
+        "difficulty_notes": "The user is reporting unexpected device connections, which could be a technical glitch or a security issue. The mention of connecting to neighbor's devices suggests possible unauthorized access, triggering escalation."
+      }
+    },
+    {
+      "thread_id": "2572233",
+      "user_tweet": "@115888 WHY TF AIN'T TAKE CARE ON SPOTIFY ANYMORE. I WAS JUST LISTENING TO THIS SHIT YESTERDAY",
+      "brand_reply": "@729398 Hey there! Not to worry, you can find that Drake album here: https://t.co/vzWbxC013c. Let us know if you have any trouble getting those tunes flowing /TO",
+      "user_author": "729398",
+      "cluster_id": 1,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user's tweet contains profanity and expresses frustration, but it is directed at the situation (content missing) rather than at support. The intent is clearly about content availability, and there is no explicit request for escalation or severe abuse."
+      }
+    },
+    {
+      "thread_id": "1190774",
+      "user_tweet": "@115888 make Spotify available for albania PLEASE",
+      "brand_reply": "@399879 Hi there! We're launching in new countries as often as possible. Be sure to add your email at https://t.co/X8DVSX9QgM. Fingers crossed we'll be with you soon /NJ",
+      "user_author": "399879",
+      "cluster_id": 1,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is requesting Spotify to be available in a specific country, which falls under content availability. No escalation triggers present."
+      }
+    },
+    {
+      "thread_id": "771042",
+      "user_tweet": "Mau bayar spotify premium kok gak bisa ya di afamart? @118266",
+      "brand_reply": "@304149 Hi there. We can help out in English via Twitter, but we also have Bahasa support via email at https://t.co/ZgU70TbP8M /JU",
+      "user_author": "304149",
+      "cluster_id": 1,
+      "auto_labels": {
+        "intent": "Billing_Payment",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is in Indonesian and mentions a specific payment method (Alfamart). The user is reporting a payment issue, not disputing a charge or requesting a refund, so it does not meet escalation criteria."
+      }
+    },
+    {
+      "thread_id": "2121333",
+      "user_tweet": "@115888 \n@SpotifyCares \nHow to be an beta testee of an Spotify app",
+      "brand_reply": "@625007 Hey there! We've sent a bit more info via DM. Check your inbox 🙂 /AY",
+      "user_author": "625007",
+      "cluster_id": 1,
+      "auto_labels": {
+        "intent": "General_Inquiry",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is asking how to become a beta tester for the Spotify app, which is a general inquiry about a process, not a specific issue with account, billing, playback, etc. It could be misclassified as Feature_Request, but it's more of a question about participation."
+      }
+    },
+    {
+      "thread_id": "573749",
+      "user_tweet": "@115888 Add me to the #Spotify #Windows 7 #client #bug list: https://t.co/S18URJh8Lp",
+      "brand_reply": "@254903 Hey there! Don't worry, we're here to help. Can you DM us your account's email address or username? We'll take a look backstage /MT https://t.co/ldFdZRiNAt",
+      "user_author": "254903",
+      "cluster_id": 1,
+      "auto_labels": {
+        "intent": "App_Bug_Crash",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet mentions a bug list and includes a link, but the intent is clearly about a client bug on Windows 7. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "821814",
+      "user_tweet": "Clearly I’m not an expert when it comes to Spotify",
+      "brand_reply": "@315758 Hey Ella! Do you need help with something? We'd love to lend a hand 💚 /MO",
+      "user_author": "315758",
+      "cluster_id": 1,
+      "auto_labels": {
+        "intent": "General_Inquiry",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is vague and self-deprecating, lacking a specific request or issue. It could be a precursor to a support need, but without more context, it's best classified as a general inquiry. The brand reply also treats it as an open-ended offer of help."
+      }
+    },
+    {
+      "thread_id": "1555045",
+      "user_tweet": "Someone hacked my spotify and cancelled my premium... why tho?",
+      "brand_reply": "@480919 Hey, that's not cool! Can you DM us your account's email address? We'll check things out. /CX https://t.co/ldFdZRiNAt",
+      "user_author": "480919",
+      "cluster_id": 1,
+      "auto_labels": {
+        "intent": "Account_Access",
+        "should_escalate": true,
+        "escalation_reason": "Account security compromise (hacking, unauthorized access)",
+        "difficulty_notes": "The tweet mentions both hacking and cancellation of premium, which could be interpreted as a billing issue, but the primary concern is unauthorized access, triggering escalation."
+      }
+    },
+    {
+      "thread_id": "1619893",
+      "user_tweet": "Hey @115888 , can you please put a \"Check for internet\" button on your desktop apps? Spotify automatically detecting a conn is frustrating!",
+      "brand_reply": "@496519 We can see how that’d be handy. Thanks for taking the time to reach out – your feedback's been noted 📝 /DF",
+      "user_author": "496519",
+      "cluster_id": 1,
+      "auto_labels": {
+        "intent": "Feature_Request",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user expresses frustration but it's directed at the app's behavior, not at support. The request is for a new feature, so no escalation is needed."
+      }
+    },
+    {
+      "thread_id": "2078824",
+      "user_tweet": "@SpotifyCares hi someone who isn't authorized is using my spotify acc. how can i prevent that person from doing so any further?",
+      "brand_reply": "@614818 Hey, that doesn't sound right! Can you DM us your account's username or email address? We'll take a look backstage /JP https://t.co/ldFdZR1cbT",
+      "user_author": "614818",
+      "cluster_id": 1,
+      "auto_labels": {
+        "intent": "Account_Access",
+        "should_escalate": true,
+        "escalation_reason": "Account security compromise - unauthorized access to account",
+        "difficulty_notes": "The user is reporting unauthorized access, which is a security concern. The tweet is polite and asks for prevention advice, but the core issue is account compromise, triggering escalation."
+      }
+    },
+    {
+      "thread_id": "765657",
+      "user_tweet": "@SpotifyCares Nor do I see the icon for Spotify in the corner of my phone anymore when music is playing.",
+      "brand_reply": "@302988 When did this start happening? Do logging out, restarting the device, and logging back in help at all? Keep us posted /ME",
+      "user_author": "302988",
+      "cluster_id": 1,
+      "auto_labels": {
+        "intent": "App_Bug_Crash",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user reports a missing icon (UI element) when music is playing, which could be interpreted as a playback issue or app bug. However, the core problem is a missing feature/icon in the app, indicating a potential bug or crash. The brand's reply suggests troubleshooting steps typical for app issues."
+      }
+    },
+    {
+      "thread_id": "558616",
+      "user_tweet": "hey guys, any ETA with the issue with dll file missing for all win7 users ? cause every time spotify autoupdate we have to unistall etc @SpotifyCares",
+      "brand_reply": "@206455 Hi there! We're afraid we don't have any specific info to share right now. Don't worry, we'll make sure to let everyone know as soon as we got something to announce /JM",
+      "user_author": "206455",
+      "cluster_id": 1,
+      "auto_labels": {
+        "intent": "App_Bug_Crash",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is reporting a recurring technical issue (missing DLL file after auto-update) and asking for an ETA. This could be mistaken for a general inquiry or feature request, but it's clearly a bug/crash issue. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "1205506",
+      "user_tweet": "Have a good lunch sa lahat except sa spotify na di pa rin binabalik premium ko!!! 😠 balik pera na lang ano @SpotifyCares",
+      "brand_reply": "@292709 Hey Rizza! We've just sent you a bit more info over DM. We'll carry on helping out there /KB",
+      "user_author": "292709",
+      "cluster_id": 1,
+      "auto_labels": {
+        "intent": "Billing_Payment",
+        "should_escalate": true,
+        "escalation_reason": "Billing/payment dispute - user is demanding a refund for premium not being restored",
+        "difficulty_notes": "The tweet mixes a general greeting with a specific complaint about premium not being restored and a refund demand. The primary issue is billing/payment, but it could also be seen as a subscription issue. The refund demand triggers escalation."
+      }
+    },
+    {
+      "thread_id": "1860777",
+      "user_tweet": "@SpotifyCares I bought a full year but my Spotify Premium still says \"update payment\". I have the receipt for the year. What's going on?",
+      "brand_reply": "@556206 Hey there, help's here! Can you DM us your account's email address and username? We'll take a look backstage 🙂 /CG https://t.co/ldFdZRiNAt",
+      "user_author": "556206",
+      "cluster_id": 1,
+      "auto_labels": {
+        "intent": "Billing_Payment",
+        "should_escalate": true,
+        "escalation_reason": "Billing/payment dispute - user paid for a full year but account shows payment update required, indicating a potential charge issue.",
+        "difficulty_notes": "The user is reporting a payment issue but also implies a subscription problem. The core issue is billing-related, and the mention of having a receipt suggests a dispute over payment status."
+      }
+    },
+    {
+      "thread_id": "102229",
+      "user_tweet": "@SpotifyCares Spotify has an obnoxious habit of streaming video loops (ads or otherwise) to my Apple TV via AirPlay. Any way to stop? This song plays weird Björk loops that I can’t stop https://t.co/7QR2qxezSD",
+      "brand_reply": "@138423 Hey Matthew, help's here! Could you shoot us a DM with your account's username or email address? We'll check things out backstage 🔍 /VV https://t.co/ldFdZRiNAt",
+      "user_author": "138423",
+      "cluster_id": 1,
+      "auto_labels": {
+        "intent": "Playback_Issue",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is reporting an issue with video loops streaming to Apple TV via AirPlay, which is a playback problem. The mention of 'ads' might suggest a billing or subscription issue, but the core complaint is about playback behavior. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "1918307",
+      "user_tweet": "@SpotifyCares \nI'm having a problem to use spotify on PC \nI'm online bt spotify shows offline \nI can't sreaming song\nplease help me",
+      "brand_reply": "@214307 Hey, help's here! Can you let us know both the operating system and Spotify version you're using? We'll see what we can suggest /GK",
+      "user_author": "214307",
+      "cluster_id": 1,
+      "auto_labels": {
+        "intent": "Playback_Issue",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user reports being online but Spotify shows offline and can't stream songs, which could be a connectivity or playback issue. The intent is classified as Playback_Issue because the primary complaint is inability to stream music, though it could also be seen as an App_Bug_Crash or Account_Access issue. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "2225754",
+      "user_tweet": "@SpotifyCares how do we put our podcast on Spotify??? Thanks",
+      "brand_reply": "@649746 Hey, thanks for your interest! For more info on getting your podcast on Spotify, check out: https://t.co/D5baW5biel 🙂 /JT",
+      "user_author": "649746",
+      "cluster_id": 1,
+      "auto_labels": {
+        "intent": "General_Inquiry",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet asks about how to publish a podcast on Spotify, which could be mistaken for Content_Availability or Feature_Request, but it's a general how-to question, so General_Inquiry is most appropriate."
+      }
+    },
+    {
+      "thread_id": "1170452",
+      "user_tweet": "@SpotifyCares comes back after restarting/logging out and in but then disappears hours later, don't fancy having to restart every time i load up spotify😭",
+      "brand_reply": "@395282 Hey there! That doesn't sound good. Can you let us know the iPhone model, iOS, and app versions you're using? /PB",
+      "user_author": "395282",
+      "cluster_id": 1,
+      "auto_labels": {
+        "intent": "App_Bug_Crash",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user describes a recurring issue where something (likely a feature or setting) disappears after a few hours, requiring a restart. This could be interpreted as a playback issue or app bug, but the mention of restarting and logging out/in suggests a technical glitch, aligning with App_Bug_Crash. The frustration is mild (crying emoji) but not extreme, so no escalation."
+      }
+    },
+    {
+      "thread_id": "1032848",
+      "user_tweet": "@SpotifyCares why was the Moon Song by Karen O ft Ezra Koenig taken off of spotify",
+      "brand_reply": "@364380 Hey! Sometimes content gets temporarily removed because of licensing changes. Hopefully we'll have it available again soon /RA",
+      "user_author": "364380",
+      "cluster_id": 1,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is asking about a specific song's removal, which clearly falls under Content_Availability. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "2653211",
+      "user_tweet": "@SpotifyCares hello is the Spotify app available for Samsung smart hub in Canada?",
+      "brand_reply": "@748244 Hey there! Could you let us know the year and model of your Samsung Smart TV? We'll see what we can suggest /MT",
+      "user_author": "748244",
+      "cluster_id": 1,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is asking about app availability on a specific platform, which could be confused with a general inquiry or feature request, but it's about content/platform availability."
+      }
+    },
+    {
+      "thread_id": "2284917",
+      "user_tweet": "@115888 #Spotify \nWhy aren't you avilable in Israel? there is a big community here that want to listen to your artist's music...",
+      "brand_reply": "@663970 Hey! We're launching in new countries as often as possible. Be sure to add your email at https://t.co/X8DVSX9QgM /DF",
+      "user_author": "663970",
+      "cluster_id": 1,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is asking about Spotify's availability in a specific country, which relates to content availability. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "244325",
+      "user_tweet": "@SpotifyCares Unfortunately, that did nothing. I downloaded a 55-song playlist on my android phone in the time my iphone took to download 2 songs.",
+      "brand_reply": "@13681 Alright. Could you DM us your account's username or email address? We'll take a look backstage /GU https://t.co/ldFdZRiNAt",
+      "user_author": "13681",
+      "cluster_id": 9,
+      "auto_labels": {
+        "intent": "Playback_Issue",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is reporting a problem with downloading songs, which could be seen as a technical issue or app bug, but the core complaint is about playback/download performance, making Playback_Issue the most appropriate category. The frustration is present but not extreme enough to warrant escalation."
+      }
+    },
+    {
+      "thread_id": "2748511",
+      "user_tweet": "@115888 please review the algorithm responsible for adding Michael Cera to my Discover Weekly playlist",
+      "brand_reply": "@769575 Hey Justin! Discover Weekly is based on what you, and others like you, are listening to. Hopefully it’s more in tune with your tastes next week /AR",
+      "user_author": "769575",
+      "cluster_id": 9,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is a humorous complaint about a specific artist appearing in a personalized playlist, which could be mistaken for a feature request or general inquiry, but it's fundamentally about the content (artist) in the playlist, making Content_Availability the best fit."
+      }
+    },
+    {
+      "thread_id": "2815929",
+      "user_tweet": "Hi @SpotifyCares have I changed something in my settings? I can't listen to a playlist for long before it starts the radio and eats up my data",
+      "brand_reply": "@785030 Hey, help's here! Looks like Autoplay is enabled on your device. You can disable it by following the steps here: https://t.co/kiXUjgr1xh. Let us know how it goes /JS",
+      "user_author": "785030",
+      "cluster_id": 9,
+      "auto_labels": {
+        "intent": "Playback_Issue",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is unsure if they changed a setting, but the core issue is playback behavior (autoplay starting radio) affecting data usage. It could be mistaken for a settings or subscription issue, but it's primarily a playback problem."
+      }
+    },
+    {
+      "thread_id": "2639840",
+      "user_tweet": "@SpotifyCares my Spotify app on phone + comp won't play my playlists or collections continuously. If I play a song, the following song is always from an old playlist that I no longer want to listen 2. Pls advise.. getting sick of 80s music.",
+      "brand_reply": "@744993 Hi Jackie! This sounds like our Autoplay feature. You can disable this by following the steps here: https://t.co/R2NEIUoQFA. We hope this helps /DN",
+      "user_author": "744993",
+      "cluster_id": 9,
+      "auto_labels": {
+        "intent": "Playback_Issue",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user describes playback behavior that could be interpreted as a bug or a feature misunderstanding. The phrase 'getting sick of 80s music' expresses frustration but is not abusive or extreme enough to warrant escalation."
+      }
+    },
+    {
+      "thread_id": "1012752",
+      "user_tweet": "i love when i make a playlist on @115888 and when i click shuffle play it doesn't even play the songs on the playlist 🙂",
+      "brand_reply": "@359647 Hey Katie, help's here! Can you DM us your account's email address? We'll see what we can suggest /JN https://t.co/ldFdZRiNAt",
+      "user_author": "359647",
+      "cluster_id": 9,
+      "auto_labels": {
+        "intent": "Playback_Issue",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet uses sarcasm to express frustration, but it's a playback issue, not an escalation-worthy case. The brand reply asks for DM, which is standard."
+      }
+    },
+    {
+      "thread_id": "1593809",
+      "user_tweet": "@115888 playing like 4 the same artist, from a playlist where I have probably 1000 songs and 100+ artists",
+      "brand_reply": "@489820 Hi there! Best thing to try here is a reinstall. Just follow the steps at https://t.co/EqisDMwZAT /NQ",
+      "user_author": "489820",
+      "cluster_id": 9,
+      "auto_labels": {
+        "intent": "Playback_Issue",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet describes a shuffle/playback behavior issue (same artist repeating) rather than a crash or account problem. It could be mistaken for a feature request or general inquiry, but the core complaint is about playback behavior."
+      }
+    },
+    {
+      "thread_id": "1974403",
+      "user_tweet": "@115888 @SpotifyCares The playlists that I deleted prior to these: \"Hi\", \"Hello\", \"Please make a playlist para malaman ko na nababasa mo to\"",
+      "brand_reply": "@584699 Hi Nikki, help's arrived! Can you DM us your account's email address? We'll take a look backstage /DV https://t.co/ldFdZRiNAt",
+      "user_author": "584699",
+      "cluster_id": 9,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is reporting deleted playlists, which could be seen as an account issue or a playback issue, but it's primarily about content (playlists) not being available. The tweet is somewhat unclear due to the quoted playlist names, but the core issue is missing content."
+      }
+    },
+    {
+      "thread_id": "199193",
+      "user_tweet": "@115888 Just saw the new description... I listen to this playlist as it calms me and helps me concentrate. People talking at me does the opposite...",
+      "brand_reply": "@162941 2: to create playlists, but we’ll pass on your suggestion. Let us know if there's anything else we can help with /DB",
+      "user_author": "162941",
+      "cluster_id": 9,
+      "auto_labels": {
+        "intent": "Feature_Request",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is expressing dissatisfaction with a playlist description, which could be seen as a complaint, but it's essentially a request to change or remove the description. The brand reply indicates they passed on the suggestion, confirming it's a feature request. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "1906846",
+      "user_tweet": "@115888 @SpotifyCares",
+      "brand_reply": "@568149 Hi Case! Thanks for the feedback. We'll be sure to pass it onto the right folks. Let us know if you have any other questions /DV",
+      "user_author": "568149",
+      "cluster_id": 11,
+      "auto_labels": {
+        "intent": "Feature_Request",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is extremely minimal, containing only mentions with no explicit request or complaint. The brand reply mentions 'feedback,' suggesting a feature request or general comment, but the lack of content makes classification ambiguous."
+      }
+    },
+    {
+      "thread_id": "2353942",
+      "user_tweet": "@SpotifyCares singapore",
+      "brand_reply": "@680152 Got it. Can you also DM us with your account's username and email address? We'll do some digging /WW https://t.co/ldFdZRiNAt",
+      "user_author": "680152",
+      "cluster_id": 11,
+      "auto_labels": {
+        "intent": "General_Inquiry",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is extremely vague, containing only a location ('singapore'), making intent classification ambiguous. The brand reply asks for account details, suggesting a possible account or availability issue, but the user's intent is unclear."
+      }
+    },
+    {
+      "thread_id": "1999296",
+      "user_tweet": "@SpotifyCares error code 17 on win 7.  I need help. very frustrated!",
+      "brand_reply": "@591150 Hey Curtis! Is this happening upon installation or start-up? What device (make &amp; model) are you using? We'll see what we can suggest /LP",
+      "user_author": "591150",
+      "cluster_id": 7,
+      "auto_labels": {
+        "intent": "App_Bug_Crash",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "User expresses frustration but not extreme or abusive; error code indicates a technical issue, not a billing or security concern."
+      }
+    },
+    {
+      "thread_id": "1707317",
+      "user_tweet": "@SpotifyCares They need to be timed differently. Also, get more sponsors. 3/4 of the ads played are Spotify ads.",
+      "brand_reply": "@517407 2: haven't had a subscription before, check out: https://t.co/zgnxs5kPEu. We're here if you need anything else /WW",
+      "user_author": "517407",
+      "cluster_id": 7,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is complaining about ad frequency and types, which relates to content availability (ads as content). The brand reply seems off-topic, suggesting possible misclassification or misunderstanding. The tweet is not clearly a feature request or general inquiry, but the core issue is about the content (ads) being played."
+      }
+    },
+    {
+      "thread_id": "1791314",
+      "user_tweet": "@SpotifyCares It won't let me update my payment pls send help I need my music",
+      "brand_reply": "@538079 Hey Jennifer, help's here! Can you DM us your account's email address or username? We'll see what we can suggest /RH https://t.co/ldFdZRiNAt",
+      "user_author": "538079",
+      "cluster_id": 7,
+      "auto_labels": {
+        "intent": "Billing_Payment",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is having trouble updating payment information, which falls under Billing_Payment. There is no explicit dispute, refund demand, or security concern, so escalation is not required. The emotional language ('I need my music') is mild and not abusive."
+      }
+    },
+    {
+      "thread_id": "12086",
+      "user_tweet": "@115888 I need help with my account I keep getting charged for an account that is on the free subscription but was once premium",
+      "brand_reply": "@118386 Hi there! Can you DM us your account's email address or username? We'll take a look backstage /NQ https://t.co/ldFdZRiNAt",
+      "user_author": "118386",
+      "cluster_id": 7,
+      "auto_labels": {
+        "intent": "Billing_Payment",
+        "should_escalate": true,
+        "escalation_reason": "Billing/payment dispute - user is being charged for a free subscription",
+        "difficulty_notes": "The user mentions account help but the core issue is an incorrect charge, which falls under billing and triggers escalation."
+      }
+    },
+    {
+      "thread_id": "904210",
+      "user_tweet": "i need nuest w on spotify asap!!!",
+      "brand_reply": "@334655 Hey there! We’d love to have all of their stuff available, but we have some info about content here: https://t.co/0i8GpimuDa /GK",
+      "user_author": "334655",
+      "cluster_id": 7,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet expresses urgency ('asap!!!') but is a request for content availability, not a complaint or escalation trigger. The exclamation marks might suggest frustration, but it's not directed at support."
+      }
+    },
+    {
+      "thread_id": "2987175",
+      "user_tweet": "@SpotifyCares need help emailed and NO the suggestions apply. The only reason am using twitter is to get an answer",
+      "brand_reply": "@823646 Hey Kathy! Is your Spotify misbehaving? What issues are you having and on what device? We'll help out /SY",
+      "user_author": "823646",
+      "cluster_id": 7,
+      "auto_labels": {
+        "intent": "General_Inquiry",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is vague and expresses frustration but does not specify a clear issue, making it hard to categorize. It could be a follow-up to an unresolved issue, but without more context, it falls under general inquiry. The frustration is not extreme enough to warrant escalation."
+      }
+    },
+    {
+      "thread_id": "836212",
+      "user_tweet": "@SpotifyCares hi I am trying to add on to my family’s account however the email link to join is not working. Can you help?",
+      "brand_reply": "@319062 Hey Kate! Can you DM us your account's username or email address? We'll take a look backstage /TC https://t.co/ldFdZRiNAt",
+      "user_author": "319062",
+      "cluster_id": 8,
+      "auto_labels": {
+        "intent": "Subscription_Plan",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The issue involves a family plan subscription, but the core problem is a broken email link, which could be seen as an account access or app bug. However, since it's specifically about joining a family plan, Subscription_Plan is the most appropriate category."
+      }
+    },
+    {
+      "thread_id": "2310896",
+      "user_tweet": "@117153 I've been charged for premium family but am not getting it on my app; already tried updating app and logging out/ back in",
+      "brand_reply": "@670204 Hey! Help's here. Can you DM us your account's username and email address? We'll take a look backstage /JL https://t.co/ldFdZRiNAt",
+      "user_author": "670204",
+      "cluster_id": 8,
+      "auto_labels": {
+        "intent": "Billing_Payment",
+        "should_escalate": true,
+        "escalation_reason": "Billing/payment dispute - charged for Premium Family but not receiving the service",
+        "difficulty_notes": "The user reports both a billing issue (charged) and a playback/access issue (not getting Premium). The core problem is the billing discrepancy, so Billing_Payment is the primary intent. Escalation is required due to the billing dispute."
+      }
+    },
+    {
+      "thread_id": "2063233",
+      "user_tweet": "@115888 I just upgraded to a family account. Can we share playlists?",
+      "brand_reply": "@610215 Hey Daniel! You can share your favorite playlists with your friends and family, just follow the steps here: https://t.co/XaUwUtMvaI /JX",
+      "user_author": "610215",
+      "cluster_id": 8,
+      "auto_labels": {
+        "intent": "Subscription_Plan",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet mentions upgrading to a family account, which relates to subscription plans, but the actual question is about sharing playlists, which could be seen as a feature inquiry. However, the context of the upgrade makes Subscription_Plan the most appropriate category."
+      }
+    },
+    {
+      "thread_id": "617477",
+      "user_tweet": "@SpotifyCares I have a problem with my Premium for Family subscription. Check your dms or I’ll pass at Deezer ♥️♥️♥️♥️",
+      "brand_reply": "@266513 Hey there! We've already responded via DM. You can check your inbox; let's carry on chatting there /PL",
+      "user_author": "266513",
+      "cluster_id": 8,
+      "auto_labels": {
+        "intent": "Subscription_Plan",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user mentions a problem with Premium for Family subscription, which could be billing or account-related, but the core issue is about the subscription plan itself. The threat to switch to Deezer is not a legal threat or extreme frustration, so no escalation."
+      }
+    },
+    {
+      "thread_id": "2780789",
+      "user_tweet": "@115888 i can't add my wife in mi family account https://t.co/hCCBfBhkYu",
+      "brand_reply": "@776646 Hey Walter! Can you DM us the usernames or email addresses of your and your wife's accounts? We'll check under the hood /MC https://t.co/ldFdZRiNAt",
+      "user_author": "776646",
+      "cluster_id": 8,
+      "auto_labels": {
+        "intent": "Subscription_Plan",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is having trouble adding a family member to a family plan, which could be interpreted as an account access issue or a subscription plan issue. However, since it's specifically about the family plan feature, Subscription_Plan is the most appropriate category. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "2052051",
+      "user_tweet": "@115888 No one from my family can sign up after sending the link. Please help. So frustrating!!!",
+      "brand_reply": "@126802 Hey there! Can you DM us your account's email address, along with your family members'? We'll take a look backstage /RH https://t.co/ldFdZRiNAt",
+      "user_author": "126802",
+      "cluster_id": 8,
+      "auto_labels": {
+        "intent": "Account_Access",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user expresses frustration ('So frustrating!!!') but it's not directed at support or abusive, and the issue is about family members being unable to sign up, which is an account access problem rather than a billing or security issue."
+      }
+    },
+    {
+      "thread_id": "569629",
+      "user_tweet": "@SpotifyCares I just signed up for your 1 year upfront payment plan, but now I want to switch to a family plan. How do I do that? Can I get a refund on the upfront payment?",
+      "brand_reply": "@253689 Hi there! Can you DM us your account's email address or username? We'll take a look backstage /NQ https://t.co/ldFdZRiNAt",
+      "user_author": "253689",
+      "cluster_id": 8,
+      "auto_labels": {
+        "intent": "Subscription_Plan",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user asks about switching plans and a refund, which touches on billing, but the primary intent is about subscription plan change. The refund request is a question, not a dispute or demand, so escalation is not triggered."
+      }
+    },
+    {
+      "thread_id": "2061974",
+      "user_tweet": "@SpotifyCares I'd like to clarify that I am on a UK student premium acc that's due to expire, and as I'm back in M'sia I'd like to get on my family's plan",
+      "brand_reply": "@609815 Hey there! We'll help out, don't worry. Can you DM us your account's username or email address? We'll see what we can suggest /GN https://t.co/ldFdZRiNAt",
+      "user_author": "609815",
+      "cluster_id": 8,
+      "auto_labels": {
+        "intent": "Subscription_Plan",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is asking about changing from a student premium plan to a family plan, which involves subscription plan management. It could be confused with billing or account access, but the core request is about plan change."
+      }
+    },
+    {
+      "thread_id": "1462466",
+      "user_tweet": "@SpotifyCares Can you refund a student discount retroactively if I forgot to update it after a year?",
+      "brand_reply": "@459435 Hi there! Can you DM us your account's email address or username? We'll take a look backstage /NQ https://t.co/ldFdZRiNAt",
+      "user_author": "459435",
+      "cluster_id": 3,
+      "auto_labels": {
+        "intent": "Billing_Payment",
+        "should_escalate": true,
+        "escalation_reason": "Billing/payment dispute (refund demand)",
+        "difficulty_notes": "The user is asking about a retroactive refund for a student discount, which is a billing/payment issue. The escalation rule for billing/payment disputes applies because it involves a refund demand. However, the user is not explicitly frustrated or threatening, so the escalation is based solely on the refund request."
+      }
+    },
+    {
+      "thread_id": "2037114",
+      "user_tweet": "@SpotifyCares @116130 I'm a student &amp; have the discount on my account. I've checked a recent paypal email &amp; the full amounts been charged",
+      "brand_reply": "@602300 Hey Sarah, help's here! Could you DM us your account's email address and username? We'll check backstage for you /BX https://t.co/ldFdZRiNAt",
+      "user_author": "602300",
+      "cluster_id": 3,
+      "auto_labels": {
+        "intent": "Billing_Payment",
+        "should_escalate": true,
+        "escalation_reason": "Billing/payment dispute - charged full amount despite student discount",
+        "difficulty_notes": "The user mentions having a student discount but being charged full amount, which is a billing issue. The escalation rule for billing/payment disputes applies, even though the user is not explicitly demanding a refund or threatening legal action. The presence of a discount suggests a subscription plan issue, but the core problem is incorrect billing."
+      }
+    },
+    {
+      "thread_id": "1883156",
+      "user_tweet": "@115888 how do I get student discount for premium now I have an NUS? It says my UNIDAYS is restricted? #pleasehelp",
+      "brand_reply": "@561979 Hey Manny! Could you send us a DM with your account's email address or username? We'll take a look backstage /FR https://t.co/ldFdZRiNAt",
+      "user_author": "561979",
+      "cluster_id": 3,
+      "auto_labels": {
+        "intent": "Subscription_Plan",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is asking about a student discount for Premium, which falls under subscription plans. The mention of UNIDAYS being restricted could be seen as a verification issue, but it's not a billing dispute or account security issue. The brand reply asks for a DM, indicating they will handle it privately, but no escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "651747",
+      "user_tweet": "@SpotifyCares Are college students the only ones applicable to the student discount? how about us High School students? 😢",
+      "brand_reply": "@274984 1: Hi! The student discount is only available for students currently enrolled in an accredited college or...",
+      "user_author": "274984",
+      "cluster_id": 3,
+      "auto_labels": {
+        "intent": "Subscription_Plan",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet asks about eligibility for a student discount, which relates to subscription plans. It could be confused with Billing_Payment, but since it's about plan eligibility rather than a payment issue, Subscription_Plan is more appropriate. The sad emoji indicates mild disappointment but not extreme frustration."
+      }
+    },
+    {
+      "thread_id": "1926252",
+      "user_tweet": "@SpotifyCares Accidentally applied my student premium to a diff fb acct! How can I change it so that my student info works for my main acct",
+      "brand_reply": "@573282 Hi Sonia! The cavalry's here. Could you DM us your accounts' email addresses? We'll take a look backstage /AU https://t.co/ldFdZRiNAt",
+      "user_author": "573282",
+      "cluster_id": 3,
+      "auto_labels": {
+        "intent": "Subscription_Plan",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is asking about changing the account associated with their student premium subscription, which could be confused with Account_Access or Billing_Payment, but it's primarily about managing the subscription plan."
+      }
+    },
+    {
+      "thread_id": "1991832",
+      "user_tweet": "@SpotifyCares so why'd you guys stop giving me hulu with my student sub?",
+      "brand_reply": "@589487 Hey Barry, help's here. Could you fire over your account's email address or username via DM? We'll take a look backstage /AY https://t.co/ldFdZRiNAt",
+      "user_author": "589487",
+      "cluster_id": 3,
+      "auto_labels": {
+        "intent": "Subscription_Plan",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is asking about a change in their student subscription benefits (Hulu inclusion), which could be confused with Content_Availability or Billing_Payment, but it's fundamentally about the subscription plan features."
+      }
+    },
+    {
+      "thread_id": "524359",
+      "user_tweet": "Hey @SpotifyCares my student account reverted to a regular premium account. I reauthorized as a student, now I can't access Hulu. Help.",
+      "brand_reply": "@241231 Hey Lougi! Could you send us a DM with your account's email address or username? We'll take a look backstage /LO https://t.co/ldFdZR1cbT",
+      "user_author": "241231",
+      "cluster_id": 3,
+      "auto_labels": {
+        "intent": "Subscription_Plan",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The issue involves a student subscription reverting and losing Hulu access, which could be mistaken for Account_Access or Billing_Payment, but it's primarily about subscription plan management."
+      }
+    },
+    {
+      "thread_id": "2199337",
+      "user_tweet": "@SpotifyCares Thank you for reaching out fast to resolve the issue even though it was my own mistake. 💖",
+      "brand_reply": "@638759 You're welcome! Let us know if you ever need us again. We'd be... https://t.co/LgAM6ky9Vv /CP",
+      "user_author": "638759",
+      "cluster_id": 2,
+      "auto_labels": {
+        "intent": "General_Inquiry",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is a positive thank-you message with no explicit request or issue, making it tricky to categorize since it doesn't fit typical problem intents; it's best classified as a general inquiry."
+      }
+    },
+    {
+      "thread_id": "453461",
+      "user_tweet": "@SpotifyCares @SpotifyCares thank you for answering! Makes sense. Happy Holidays!",
+      "brand_reply": "@222593 You're welcome! Let us know if you ever need us again. We'd be happy to help. Have a... https://t.co/fOHcTvQJC3 /AN",
+      "user_author": "222593",
+      "cluster_id": 2,
+      "auto_labels": {
+        "intent": "General_Inquiry",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "This is a positive closing message with no specific request or issue, making it a straightforward general inquiry. The challenge is recognizing that no actionable intent exists, so it defaults to General_Inquiry."
+      }
+    },
+    {
+      "thread_id": "80931",
+      "user_tweet": "@133962 @133963 Thank you! It’s so annoying that #Reputation still isn’t available on Spotify",
+      "brand_reply": "@133961 You're welcome. Don't worry, we’ll have it available to you as soon as it’s available to us! For now, check out the singles: https://t.co/3h0TnPWP0c. Give us a shout if you need anything else /DN",
+      "user_author": "133961",
+      "cluster_id": 2,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet expresses frustration about a missing album, but it's directed at other users rather than SpotifyCares, and the frustration is mild and not abusive. No escalation triggers apply."
+      }
+    },
+    {
+      "thread_id": "2539781",
+      "user_tweet": "Hey @SpotifyCares ! I need a document with all the datas you have about me, is that possible ? ☺️ Thanks !",
+      "brand_reply": "@722257 Hey Louisianne! Could you let us know which data you're referring to? We'll see what we can do /AY",
+      "user_author": "722257",
+      "cluster_id": 7,
+      "auto_labels": {
+        "intent": "General_Inquiry",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The request for personal data could be misinterpreted as an account access issue, but it's a general inquiry about data privacy. No escalation triggers present."
+      }
+    },
+    {
+      "thread_id": "1815001",
+      "user_tweet": "@SpotifyCares Hey i just canceled my spotify premium that auto renewd yesterday, i need that money back please help i need it soon! please",
+      "brand_reply": "@545229 Hey there, help's arrived! Could you send us a DM with your account's email address and username? We'll take a look backstage /RV https://t.co/ldFdZRiNAt",
+      "user_author": "545229",
+      "cluster_id": 7,
+      "auto_labels": {
+        "intent": "Billing_Payment",
+        "should_escalate": true,
+        "escalation_reason": "Billing/payment dispute - user is requesting a refund for an auto-renewal charge",
+        "difficulty_notes": "The user mentions canceling premium and needing money back, which is a refund request. The urgency ('i need it soon!') adds pressure but doesn't change the escalation rule. The brand reply asks for DM, which is standard, but the escalation rule for billing disputes still applies."
+      }
+    },
+    {
+      "thread_id": "2782136",
+      "user_tweet": "@SpotifyCares I have tried to take up the spotify premium offer of 9.99 for 3 months and it says 'It looks like you've already taken a free trial or discount offer. Our regular Spotify Premium plan is just a click a way. Click continue to read more.'  I don't understand.",
+      "brand_reply": "@342858 Hey there! Can you DM us your account's email address and username? We'll take a look backstage /AL",
+      "user_author": "342858",
+      "cluster_id": 1,
+      "auto_labels": {
+        "intent": "Subscription_Plan",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is confused about a subscription offer error, which could be mistaken for a billing issue, but it's about plan eligibility and understanding the offer, not a payment dispute."
+      }
+    },
+    {
+      "thread_id": "1253066",
+      "user_tweet": "@115888 plz incorporate a sleep timer. Its too much work to use you before the zzz",
+      "brand_reply": "@413945 Zzzzz... Sorry, dozed off there. But a Sleep Timer is a great idea! Show your support here: https://t.co/pMmX7wXq24 /FR",
+      "user_author": "413945",
+      "cluster_id": 14,
+      "auto_labels": {
+        "intent": "Feature_Request",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user is requesting a new feature (sleep timer) rather than reporting a problem, so it's a feature request. The casual tone and mention of 'zzz' might be misread as a complaint, but it's clearly a suggestion."
+      }
+    },
+    {
+      "thread_id": "2058953",
+      "user_tweet": "Yo what happened? Where’s my boy Yoongi songs at? \n\n@115888 @9756 @133324 #BTS #ARMY #Spotify https://t.co/fltOXLNXvc",
+      "brand_reply": "@608949 Hey there! Sometimes content gets temporarily removed because of licensing changes. Hopefully we'll have it available again soon 🙂 /DD",
+      "user_author": "608949",
+      "cluster_id": 1,
+      "auto_labels": {
+        "intent": "Content_Availability",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The tweet is informal and uses fandom-specific references (Yoongi, BTS, ARMY), but the core issue is missing content. No escalation triggers are present."
+      }
+    },
+    {
+      "thread_id": "2907378",
+      "user_tweet": "@SpotifyCares Our family account seems to no longer exist. I have only spotify free and paypal payment not taken. Can you advise?",
+      "brand_reply": "@805044 Hi there. Can you DM us your account's email address? We'll take a look backstage /LM https://t.co/ldFdZRiNAt",
+      "user_author": "805044",
+      "cluster_id": 8,
+      "auto_labels": {
+        "intent": "Account_Access",
+        "should_escalate": false,
+        "escalation_reason": null,
+        "difficulty_notes": "The user reports a missing family account and a payment issue, which could be classified as Billing_Payment or Subscription_Plan. However, the primary concern is the account no longer existing, making Account_Access the most appropriate category. The payment issue is secondary and not a dispute or refund demand, so escalation is not required."
+      }
+    }
+  ]
+}

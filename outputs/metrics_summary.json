@@ -1,0 +1,377 @@
+{
+  "Trivial_Baseline": {
+    "intent_metrics": {
+      "accuracy": 0.15,
+      "f1_macro": 0.03260869565217391,
+      "f1_weighted": 0.0391304347826087,
+      "per_class_f1": {
+        "Account_Access": 0.0,
+        "App_Bug_Crash": 0.0,
+        "Billing_Payment": 0.0,
+        "Content_Availability": 0.0,
+        "Feature_Request": 0.0,
+        "General_Inquiry": 0.2608695652173913,
+        "Playback_Issue": 0.0,
+        "Subscription_Plan": 0.0
+      },
+      "confusion_matrix": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          28,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          14,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          20,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          37,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          25,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          30,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          25,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          21,
+          0,
+          0
+        ]
+      ],
+      "labels": [
+        "Account_Access",
+        "App_Bug_Crash",
+        "Billing_Payment",
+        "Content_Availability",
+        "Feature_Request",
+        "General_Inquiry",
+        "Playback_Issue",
+        "Subscription_Plan"
+      ]
+    },
+    "escalation_metrics": {
+      "accuracy": 0.09,
+      "precision": 0.09,
+      "recall": 1.0,
+      "f1": 0.1651376146788991,
+      "true_positives": 18,
+      "false_positives": 182,
+      "false_negatives": 0,
+      "true_negatives": 0
+    },
+    "judge_scores": {},
+    "elapsed_seconds": 0.04979991912841797
+  },
+  "ZeroShot_Agent": {
+    "intent_metrics": {
+      "accuracy": 0.89,
+      "f1_macro": 0.8888507034580514,
+      "f1_weighted": 0.8901768338246182,
+      "per_class_f1": {
+        "Account_Access": 0.9285714285714286,
+        "App_Bug_Crash": 0.8484848484848485,
+        "Billing_Payment": 0.975609756097561,
+        "Content_Availability": 0.8888888888888888,
+        "Feature_Request": 0.8695652173913043,
+        "General_Inquiry": 0.9206349206349206,
+        "Playback_Issue": 0.7843137254901961,
+        "Subscription_Plan": 0.8947368421052632
+      },
+      "confusion_matrix": [
+        [
+          26,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0
+        ],
+        [
+          0,
+          14,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          20,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          32,
+          1,
+          2,
+          2,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          1,
+          20,
+          1,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          29,
+          0,
+          0
+        ],
+        [
+          1,
+          4,
+          0,
+          0,
+          0,
+          0,
+          20,
+          0
+        ],
+        [
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          17
+        ]
+      ],
+      "labels": [
+        "Account_Access",
+        "App_Bug_Crash",
+        "Billing_Payment",
+        "Content_Availability",
+        "Feature_Request",
+        "General_Inquiry",
+        "Playback_Issue",
+        "Subscription_Plan"
+      ]
+    },
+    "escalation_metrics": {
+      "accuracy": 0.65,
+      "precision": 0.20454545454545456,
+      "recall": 1.0,
+      "f1": 0.33962264150943394,
+      "true_positives": 18,
+      "false_positives": 70,
+      "false_negatives": 0,
+      "true_negatives": 112
+    },
+    "judge_scores": {
+      "mean_empathy": 4.3,
+      "mean_helpfulness": 3.9,
+      "mean_safety": 4.6,
+      "mean_overall": 4.2665,
+      "n_judged": 40
+    },
+    "elapsed_seconds": 323.5082378387451
+  },
+  "RAG_Agent": {
+    "intent_metrics": {
+      "accuracy": 0.88,
+      "f1_macro": 0.8772442307940242,
+      "f1_weighted": 0.8803110332276046,
+      "per_class_f1": {
+        "Account_Access": 0.8928571428571429,
+        "App_Bug_Crash": 0.8387096774193549,
+        "Billing_Payment": 0.975609756097561,
+        "Content_Availability": 0.9014084507042254,
+        "Feature_Request": 0.88,
+        "General_Inquiry": 0.9180327868852459,
+        "Playback_Issue": 0.7692307692307693,
+        "Subscription_Plan": 0.8421052631578947
+      },
+      "confusion_matrix": [
+        [
+          25,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          13,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          20,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          32,
+          2,
+          1,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          22,
+          1,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          1,
+          28,
+          0,
+          0
+        ],
+        [
+          1,
+          4,
+          0,
+          0,
+          0,
+          0,
+          20,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          1,
+          0,
+          0,
+          2,
+          16
+        ]
+      ],
+      "labels": [
+        "Account_Access",
+        "App_Bug_Crash",
+        "Billing_Payment",
+        "Content_Availability",
+        "Feature_Request",
+        "General_Inquiry",
+        "Playback_Issue",
+        "Subscription_Plan"
+      ]
+    },
+    "escalation_metrics": {
+      "accuracy": 0.975,
+      "precision": 0.8421052631578947,
+      "recall": 0.8888888888888888,
+      "f1": 0.8648648648648649,
+      "true_positives": 16,
+      "false_positives": 3,
+      "false_negatives": 2,
+      "true_negatives": 179
+    },
+    "judge_scores": {
+      "mean_empathy": 4.8,
+      "mean_helpfulness": 4.325,
+      "mean_safety": 4.95,
+      "mean_overall": 4.69225,
+      "n_judged": 40
+    },
+    "elapsed_seconds": 327.78952383995056
+  }
+}
